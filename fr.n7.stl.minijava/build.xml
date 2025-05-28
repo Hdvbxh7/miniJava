@@ -1,4 +1,4 @@
-<project name="MiniCCompiler" default="compile" basedir=".">
+<project name="MiniJavaCompiler" default="compile" basedir=".">
 
 	<property name="java" location="src" />
 	<property name="classes" location="bin/cls" />
@@ -9,17 +9,18 @@
 
 
 	<path id="libraries">
-		<files includes="${tools}/commons-text-1.9.jar" />
+		<files includes="${tools}/java-cup-11b-runtime.jar" />
+		<files includes="${tools}/commons-text-1.2.jar" />
 		<files includes="${tools}/antlr-4.13.1-complete.jar" />
 	</path>
 
 	<target name="generate">
-		<mkdir dir="${java}/fr/n7/stl/minic/parser"/>
+		<mkdir dir="${java}/fr/n7/stl/minijava/parser"/>
 		<java classname="org.antlr.v4.Tool" classpath="tools/antlr-4.13.1-complete.jar:$CLASSPATH">
 			<arg value="-o" />
-            <arg value="${java}/fr/n7/stl/minic/parser" />
-            <arg value="MiniCLexer.g4" />
-            <arg value="MiniCParser.g4" />
+            <arg value="${java}/fr/n7/stl/minijava/parser"/>
+            <arg value="MiniJavaLexer.g4" />
+            <arg value="MiniJavaParser.g4" />
 		</java>
 	</target>
 
