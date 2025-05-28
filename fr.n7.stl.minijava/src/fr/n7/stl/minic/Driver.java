@@ -1,10 +1,9 @@
-package fr.n7.stl.minic;
+package fr.n7.stl.minijava;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-import fr.n7.stl.minic.parser.MiniCLexer;
-import fr.n7.stl.minic.parser.MiniCParser;
+import fr.n7.stl.minijava.parser.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,9 +13,9 @@ class Driver {
 	public static void main(String[] args) throws Exception {
         String[] files; 
         if (args.length == 0) {
-            System.out.println("Using default file : input.txt");
+            System.out.println("Using default file : input.mjava");
             files = new String[1];
-            files[0] = "input.txt";
+            files[0] = "input.mjava";
         } else {
             files = args;
         }
@@ -25,10 +24,10 @@ class Driver {
             try {
                 CharStream input = CharStreams.fromFileName(name);
                 ParsingErrorListener errorListener = new ParsingErrorListener();
-                MiniCLexer lexer = new MiniCLexer(input);
+                MiniJavaLexer lexer = new MiniJavaLexer(input);
                 lexer.addErrorListener(errorListener);
                 CommonTokenStream tokens = new CommonTokenStream(lexer);
-                MiniCParser parser = new MiniCParser(tokens);
+                MiniJavaParser parser = new MiniJavaParser(tokens);
                 parser.addErrorListener(errorListener);
                 ParseTree tree = parser.programme();
                 ParseTreeWalker walker = new ParseTreeWalker();

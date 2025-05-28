@@ -1,4 +1,4 @@
-package fr.n7.stl.minic;
+package fr.n7.stl.minijava;
 
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.RecognitionException;
