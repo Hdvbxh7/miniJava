@@ -1,5 +1,0 @@
-monProgramme {
-    <int,int> c = <2,3>;
-    print fst c;
-    print snd c;
-}

@@ -1,4 +1,0 @@
-monProgramme {
-    int j = 0;
-    j = 'f';
-}
