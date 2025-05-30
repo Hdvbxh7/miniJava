@@ -11,6 +11,7 @@ import fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.scope.Scope;
+import fr.n7.stl.minic.ast.scope.SymbolTable;
 import fr.n7.stl.util.Logger;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
@@ -79,20 +80,6 @@ public class ClassDeclaration implements Instruction, Declaration {
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 
-		for (ClassElement element : this.elements) {
-			if (element instanceof AttributeDeclaration eAttribute) {
-
-				if (_scope.accepts(this)) {
-					_scope.register(eAttribute);
-				}
-
-			} else if (element instanceof MethodDeclaration eAttribute) {
-
-			} else if (element instanceof ConstructorDeclaration eAttribute) {
-
-			}
-
-		}
 
 		return true;
 
