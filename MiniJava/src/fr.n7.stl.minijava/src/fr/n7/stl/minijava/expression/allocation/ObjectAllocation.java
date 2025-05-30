@@ -24,26 +24,22 @@ public class ObjectAllocation  implements AccessibleExpression, AssignableExpres
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in ObjectAllocation.");
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in ObjectAllocation.");
 	}
 
 	@Override
 	public Type getType() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new SemanticsUndefinedException("Semantics getType is not implemented in ObjectAllocation.");
 	}
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new SemanticsUndefinedException("Semantics getCode is not implemented in ObjectAllocation.");
 	}
 	
 	@Override

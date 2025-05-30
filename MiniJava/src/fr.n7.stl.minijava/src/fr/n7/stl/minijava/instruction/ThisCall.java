@@ -14,6 +14,7 @@ import fr.n7.stl.minijava.ast.type.declaration.MethodDeclaration;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public class ThisCall implements Instruction {
 	
@@ -27,38 +28,32 @@ public class ThisCall implements Instruction {
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in ThiCall.");
 	}
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope, FunctionDeclaration _container) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics collectAndPartialResolvecontainer is not implemented in ThiCall.");
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in ThiCall.");
 	}
 
 	@Override
 	public boolean checkType() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics checkType is not implemented in ThiCall.");
 	}
 
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new SemanticsUndefinedException("Semantics allocateMemory is not implemented in ThiCall.");
 	}
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new SemanticsUndefinedException("Semantics getCode is not implemented in ThiCall.");
 	}
 	
 	@Override

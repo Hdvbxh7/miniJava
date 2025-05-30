@@ -3,6 +3,7 @@ package fr.n7.stl.minijava.ast.type;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public class ClassType implements Type {
 	
@@ -14,32 +15,27 @@ public class ClassType implements Type {
 
 	@Override
 	public boolean equalsTo(Type _other) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics equalsTo is not implemented in ClassType.");
 	}
 
 	@Override
 	public boolean compatibleWith(Type _other) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics compatibleWith is not implemented in ClassType.");
 	}
 
 	@Override
 	public Type merge(Type _other) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new SemanticsUndefinedException("Semantics merge is not implemented in ClassType.");
 	}
 
 	@Override
 	public int length() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new SemanticsUndefinedException("Semantics length is not implemented in ClassType.");
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in ClassType.");
 	}
 	
 	public String toString() {

@@ -3,6 +3,7 @@
  */
 package fr.n7.stl.minijava.ast.type.declaration;
 
+import java.lang.classfile.ClassElement;
 import java.util.List;
 
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
@@ -82,8 +83,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public Type getType() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new SemanticsUndefinedException("Semantics getType is not implemented in ClassDeclaration.");
 	}
 	
 	@Override

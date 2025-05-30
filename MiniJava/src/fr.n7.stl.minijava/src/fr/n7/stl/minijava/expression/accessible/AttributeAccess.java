@@ -16,26 +16,22 @@ public class AttributeAccess extends AbstractAttribute<AccessibleExpression>  im
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in access.");
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in access.");
 	}
 
 	@Override
 	public Type getType() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new SemanticsUndefinedException("Semantics getType is not implemented in access.");
 	}
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new SemanticsUndefinedException("Semantics getCode is not implemented in access.");
 	}
 
 }

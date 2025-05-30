@@ -27,38 +27,32 @@ public class SuperCall implements Instruction {
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in SuperCall.");
 	}
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope, FunctionDeclaration _container) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics collectAndPartialResolvecontainer is not implemented in SuperCall.");
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in SuperCall.");
 	}
 
 	@Override
 	public boolean checkType() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new SemanticsUndefinedException("Semantics checkType is not implemented in SuperCall.");
 	}
 
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new SemanticsUndefinedException("Semantics allocateMemory is not implemented in SuperCall.");
 	}
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new SemanticsUndefinedException("Semantics getCode is not implemented in SuperCall.");
 	}
 	
 	@Override

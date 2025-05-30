@@ -58,8 +58,7 @@ public class MethodDeclaration  extends ClassElement {
 
 	@Override
 	public Type getType() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new SemanticsUndefinedException("Semantics getType is not implemented in MethodDeclaration.");
 	}
 
 }
