@@ -11,6 +11,7 @@ import fr.n7.stl.minic.ast.instruction.Instruction;
 import fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.scope.Scope;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -48,17 +49,48 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics collect is undefined in ClassDeclaration.");
+
+		if (_scope.accepts(this) && _scope.knows(this.ancestor)) {
+			_scope.register(this);
+		} else {
+			Logger.warning("Class" + this.name + "Is already defined");
+			return false;
+		}
+		
 	}
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope, FunctionDeclaration _container) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in ClassDeclaration.");
+
+		if (_scope.accepts(this) && _scope.knows(this.ancestor)) {
+			_scope.register(this);
+		} else {
+			Logger.warning("Class" + this.name + "Is already defined");
+			return false;
+		}
+
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException( "Semantics resolve is undefined in ClassDeclaration.");
+
+		for (ClassElement element : this.elements) {
+			if (element instanceof AttributeDeclaration) {
+
+				if (_scope.accepts(this)) {
+					_scope.register(element.getName());
+				}
+
+			} else if (element instanceof MethodDeclaration) {
+
+			} else if (element instanceof ConstructorDeclaration) {
+
+			}
+
+		}
+
+		return true;
+
 	}
 
 	@Override
