@@ -3,7 +3,6 @@
  */
 package fr.n7.stl.minijava.ast.type.declaration;
 
-import java.lang.classfile.ClassElement;
 import java.util.List;
 
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
@@ -12,6 +11,7 @@ import fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.scope.Scope;
+import fr.n7.stl.util.Logger;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -50,12 +50,16 @@ public class ClassDeclaration implements Instruction, Declaration {
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 
-		if (_scope.accepts(this) && _scope.knows(this.ancestor)) {
-			_scope.register(this);
+		if (_scope.accepts(this)) {
+			if (this.ancestor != null && _scope.knows(this.ancestor)) {
+				_scope.register(this);
+			}
+			
 		} else {
-			Logger.warning("Class" + this.name + "Is already defined");
-			return false;
+			Logger.error("Class " + this.name + " Is already defined");
+			
 		}
+		return true;
 		
 	}
 
@@ -65,9 +69,10 @@ public class ClassDeclaration implements Instruction, Declaration {
 		if (_scope.accepts(this) && _scope.knows(this.ancestor)) {
 			_scope.register(this);
 		} else {
-			Logger.warning("Class" + this.name + "Is already defined");
-			return false;
+			Logger.error("Class " + this.name + " Is already defined");
+			
 		}
+		return true;
 
 	}
 
@@ -75,15 +80,15 @@ public class ClassDeclaration implements Instruction, Declaration {
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 
 		for (ClassElement element : this.elements) {
-			if (element instanceof AttributeDeclaration) {
+			if (element instanceof AttributeDeclaration eAttribute) {
 
 				if (_scope.accepts(this)) {
-					_scope.register(element.getName());
+					_scope.register(eAttribute);
 				}
 
-			} else if (element instanceof MethodDeclaration) {
+			} else if (element instanceof MethodDeclaration eAttribute) {
 
-			} else if (element instanceof ConstructorDeclaration) {
+			} else if (element instanceof ConstructorDeclaration eAttribute) {
 
 			}
 
