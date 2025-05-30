@@ -8,6 +8,7 @@ import fr.n7.stl.minic.ast.type.declaration.FieldDeclaration;
 import fr.n7.stl.minijava.ast.type.declaration.AttributeDeclaration;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public abstract class AbstractAttribute <ObjectKind extends Expression> implements Expression {
 	

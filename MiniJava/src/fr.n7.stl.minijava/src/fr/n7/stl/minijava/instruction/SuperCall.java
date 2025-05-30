@@ -14,6 +14,7 @@ import fr.n7.stl.minijava.ast.type.declaration.MethodDeclaration;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public class SuperCall implements Instruction {
 	

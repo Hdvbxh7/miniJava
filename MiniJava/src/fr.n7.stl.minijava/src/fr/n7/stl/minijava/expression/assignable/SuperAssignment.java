@@ -4,6 +4,7 @@ import fr.n7.stl.minic.ast.expression.assignable.AssignableExpression;
 import fr.n7.stl.minijava.expression.AbstractSuper;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public class SuperAssignment extends AbstractSuper<AssignableExpression> implements AssignableExpression {
 

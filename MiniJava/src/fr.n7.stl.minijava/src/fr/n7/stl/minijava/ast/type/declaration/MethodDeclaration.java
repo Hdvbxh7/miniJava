@@ -7,6 +7,7 @@ import fr.n7.stl.minic.ast.Block;
 import fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public class MethodDeclaration  extends ClassElement {
 	

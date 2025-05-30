@@ -7,6 +7,7 @@ import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.minijava.expression.AbstractAttribute;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public class AttributeAccess extends AbstractAttribute<AccessibleExpression>  implements AccessibleExpression {
 

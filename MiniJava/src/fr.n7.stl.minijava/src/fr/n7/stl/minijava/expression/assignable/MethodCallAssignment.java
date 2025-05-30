@@ -15,6 +15,7 @@ import fr.n7.stl.minijava.expression.AbstractMethodCall;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public class MethodCallAssignment extends AbstractMethodCall<AssignableExpression> implements AssignableExpression {
 

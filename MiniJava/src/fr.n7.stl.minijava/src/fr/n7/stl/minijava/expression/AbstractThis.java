@@ -4,6 +4,7 @@ import fr.n7.stl.minic.ast.expression.Expression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public abstract class AbstractThis <ObjectKind extends Expression> implements Expression {
 
