@@ -4,7 +4,11 @@ class A {
 	
 }
 
-public class Maine {
+public class Main {
+
+	static int succ(int i) {
+		return i + 1;
+	}
 
 	public static void main(String[] args) {
 

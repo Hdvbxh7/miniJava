@@ -28,6 +28,7 @@ public class MainDeclaration implements Instruction {
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
+		System.out.println(this.declarations.get(0));
 		return main.collectAndPartialResolve(_scope);
 	}
 
