@@ -38,7 +38,7 @@ public abstract class ClassElement  implements Declaration {
 	
 	@Override
 	public String getName() {
-		return this.name;
+		return this.name; 
 	}
 
 }
