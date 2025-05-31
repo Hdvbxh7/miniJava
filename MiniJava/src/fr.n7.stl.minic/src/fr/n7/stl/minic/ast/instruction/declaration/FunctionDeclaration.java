@@ -6,8 +6,6 @@ package fr.n7.stl.minic.ast.instruction.declaration;
 import java.util.Iterator;
 import java.util.List;
 
-import org.antlr.v4.parse.ANTLRParser.blockEntry_return;
-
 import fr.n7.stl.minic.ast.Block;
 import fr.n7.stl.minic.ast.instruction.Instruction;
 import fr.n7.stl.minic.ast.scope.Declaration;
