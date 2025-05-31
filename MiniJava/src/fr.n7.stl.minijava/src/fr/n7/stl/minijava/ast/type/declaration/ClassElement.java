@@ -12,7 +12,7 @@ public abstract class ClassElement  implements Declaration {
 	
 	public ClassElement(ElementKind _elementKind, AccessRight _accessRight, String _name) {
 		this.elementKind = _elementKind;
-		this.accessRight = _accessRight;
+		this.accessRight = _accessRight; 
 		this.name = _name;
 	}
 	
