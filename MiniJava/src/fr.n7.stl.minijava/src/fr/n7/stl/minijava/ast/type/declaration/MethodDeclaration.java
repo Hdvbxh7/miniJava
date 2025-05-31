@@ -59,7 +59,6 @@ public class MethodDeclaration  extends ClassElement {
 
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in MethodDeclaration.");
+		return this.type;
 	}
-
 }

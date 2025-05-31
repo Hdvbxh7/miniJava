@@ -15,6 +15,7 @@ import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 public class ObjectAllocation  implements AccessibleExpression, AssignableExpression {
 	
 	protected String name;
+	protected Declaration declaration;
 	
 	protected List<AccessibleExpression> arguments;
 
@@ -25,17 +26,21 @@ public class ObjectAllocation  implements AccessibleExpression, AssignableExpres
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in ObjectAllocation.");
+		if(_scope.knows(name)){
+			this.declaration = _scope.get(name);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in ObjectAllocation.");
+		return true;
 	}
 
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in ObjectAllocation.");
+		return declaration.getType();
 	}
 
 	@Override

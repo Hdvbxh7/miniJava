@@ -1,4 +1,4 @@
-// Generated from /home/eldercraft/miniJava/MiniJava/src/fr.n7.stl.minijava/MiniJavaLexer.g4 by ANTLR 4.13.1
+// Generated from /home/gutierrez/projet ecole/minijava/miniJava/MiniJava/src/fr.n7.stl.minijava/MiniJavaLexer.g4 by ANTLR 4.13.1
 
 package fr.n7.stl.minijava.parser;
 

@@ -14,6 +14,7 @@ import fr.n7.stl.minic.ast.scope.Scope;
 import fr.n7.stl.minic.ast.scope.SymbolTable;
 import fr.n7.stl.util.Logger;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.minijava.ast.type.ClassType;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -25,6 +26,10 @@ public class ClassDeclaration implements Instruction, Declaration {
 	
 	protected List<ClassElement> elements;
 	
+	public List<ClassElement> getElements() {
+		return elements;
+	}
+
 	protected boolean concrete;
 	
 	protected String name;
@@ -52,12 +57,11 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-
+		boolean ok = true;
 		if (_scope.accepts(this)) {
-			if (this.ancestor != null && _scope.knows(this.ancestor)) {
+			if (this.ancestor == null || _scope.knows(this.ancestor)) {
 				_scope.register(this);
 			}
-			
 		} else {
 			Logger.error("Class " + this.name + " Is already defined");
 		}
@@ -69,7 +73,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 				if (classScope.accepts(eAttribute)) {
 					classScope.register(eAttribute);
-					eAttribute.getType().completeResolve(classScope);
+					ok = ok && eAttribute.getType().completeResolve(classScope);
 				} else {
 					Logger.error("Attribute " + eAttribute.getName() + " is already defined in class " + this.name);
 				}
@@ -78,6 +82,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 				if (classScope.accepts(eConstructor)) {
 					classScope.register(eConstructor);
+					ok = ok && eConstructor.body.collectAndPartialResolve(classScope);
 				} else {
 					Logger.error("Constructor " + eConstructor.getName() + " is already defined in class " + this.name);
 				}
@@ -111,24 +116,32 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in MethodDeclaration.");
-
+		return true;
 	}
 
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException( "Semantics check type is undefined in ClassDeclaration.");
+		boolean ok = true;
+		for (ClassElement element : this.elements) {
+			if (element instanceof ConstructorDeclaration eConstructor) {
+					ok = ok && eConstructor.body.checkType();
+			} else if (element instanceof MethodDeclaration eMethod) {
+					ok = ok && eMethod.body.checkType();
+			}
+		}
+
+		return ok;
 	}
 
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "Semantics allocation memory is undefined in ClassDeclaration.");
+		return 0;
 	}
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "Semantics get code is undefined in ClassDeclaration.");
+		Fragment fragment = _factory.createFragment();
+		return fragment;
 	}
 
 	@Override
@@ -138,7 +151,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in ClassDeclaration.");
+		return new ClassType(name);
 	}
 	
 	@Override
