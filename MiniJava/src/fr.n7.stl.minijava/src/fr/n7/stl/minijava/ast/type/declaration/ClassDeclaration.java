@@ -69,6 +69,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 				if (classScope.accepts(eAttribute)) {
 					classScope.register(eAttribute);
+					eAttribute.getType().completeResolve(classScope);
 				} else {
 					Logger.error("Attribute " + eAttribute.getName() + " is already defined in class " + this.name);
 				}
