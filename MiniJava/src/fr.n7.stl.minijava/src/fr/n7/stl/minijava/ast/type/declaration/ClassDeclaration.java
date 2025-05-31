@@ -73,20 +73,20 @@ public class ClassDeclaration implements Instruction, Declaration {
 					Logger.error("Attribute " + eAttribute.getName() + " is already defined in class " + this.name);
 				}
 
-			} else if (element instanceof ConstructorDeclaration eAttribute) {
+			} else if (element instanceof ConstructorDeclaration eConstructor) {
 
-				if (classScope.accepts(eAttribute)) {
-					classScope.register(eAttribute);
+				if (classScope.accepts(eConstructor)) {
+					classScope.register(eConstructor);
 				} else {
-					Logger.error("Constructor " + eAttribute.getName() + " is already defined in class " + this.name);
+					Logger.error("Constructor " + eConstructor.getName() + " is already defined in class " + this.name);
 				}
 				
-			} else if (element instanceof MethodDeclaration eAttribute) {
+			} else if (element instanceof MethodDeclaration eMethod) {
 
-				if (classScope.accepts(eAttribute)) {
-					classScope.register(eAttribute);
+				if (classScope.accepts(eMethod)) {
+					classScope.register(eMethod);
 				} else {
-					Logger.error("Method " + eAttribute.getName() + " is already defined in class " + this.name);
+					Logger.error("Method " + eMethod.getName() + " is already defined in class " + this.name);
 				}
 			}
 		}
