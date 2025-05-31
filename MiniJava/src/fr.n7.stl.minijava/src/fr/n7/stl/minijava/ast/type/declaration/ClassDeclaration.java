@@ -31,6 +31,8 @@ public class ClassDeclaration implements Instruction, Declaration {
 	
 	protected String ancestor;
 
+	protected HierarchicalScope classScope;
+
 	/**
 	 * 
 	 */
@@ -58,8 +60,37 @@ public class ClassDeclaration implements Instruction, Declaration {
 			
 		} else {
 			Logger.error("Class " + this.name + " Is already defined");
-			
 		}
+
+		classScope = new SymbolTable(_scope);
+
+		for (ClassElement element : this.elements) {
+			if (element instanceof AttributeDeclaration eAttribute) {
+
+				if (classScope.accepts(eAttribute)) {
+					classScope.register(eAttribute);
+				} else {
+					Logger.error("Attribute " + eAttribute.getName() + " is already defined in class " + this.name);
+				}
+
+			} else if (element instanceof ConstructorDeclaration eAttribute) {
+
+				if (classScope.accepts(eAttribute)) {
+					classScope.register(eAttribute);
+				} else {
+					Logger.error("Constructor " + eAttribute.getName() + " is already defined in class " + this.name);
+				}
+				
+			} else if (element instanceof MethodDeclaration eAttribute) {
+
+				if (classScope.accepts(eAttribute)) {
+					classScope.register(eAttribute);
+				} else {
+					Logger.error("Constructor " + eAttribute.getName() + " is already defined in class " + this.name);
+				}
+			}
+		}
+
 		return true;
 		
 	}
@@ -80,8 +111,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 
-
-		return true;
+		throw new SemanticsUndefinedException("Semantics getType is not implemented in MethodDeclaration.");
 
 	}
 

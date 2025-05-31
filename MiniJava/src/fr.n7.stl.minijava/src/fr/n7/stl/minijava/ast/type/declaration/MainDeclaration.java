@@ -28,7 +28,7 @@ public class MainDeclaration implements Instruction {
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in MainDeclaration.");
+		return main.collectAndPartialResolve(_scope);
 	}
 
 	@Override
