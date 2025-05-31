@@ -86,7 +86,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 				if (classScope.accepts(eAttribute)) {
 					classScope.register(eAttribute);
 				} else {
-					Logger.error("Constructor " + eAttribute.getName() + " is already defined in class " + this.name);
+					Logger.error("Method " + eAttribute.getName() + " is already defined in class " + this.name);
 				}
 			}
 		}
