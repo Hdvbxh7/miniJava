@@ -5,7 +5,9 @@ import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.minic.ast.type.declaration.FieldDeclaration;
+import fr.n7.stl.minijava.ast.type.ClassType;
 import fr.n7.stl.minijava.ast.type.declaration.AttributeDeclaration;
+import fr.n7.stl.minijava.ast.type.declaration.ClassDeclaration;
 import fr.n7.stl.minic.ast.expression.assignable.VariableAssignment;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
@@ -24,20 +26,26 @@ public abstract class AbstractAttribute <ObjectKind extends Expression> implemen
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		if(object.collectAndPartialResolve(_scope)){
-			
+		boolean ok =true;
+		ok = ok && this.object.collectAndPartialResolve(_scope);
+		ok = ok && this.object.getType().completeResolve(_scope);	
+		if(this.object.getType() instanceof ClassType cobject){
+			if((_scope.knows(cobject.getName()) && (_scope.get(cobject.getName()) instanceof ClassDeclaration cdec))){
+				attribute = cdec.getAttribute(name);
+				return ok;
+			}
 		}
 		return false;
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in AbstractAttribute.");
+		return object.completeResolve(_scope) && this.object.getType().completeResolve(_scope);
 	}
 
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in AbstractAttribute.");
+		return attribute.getType();
 	}
 	
 	@Override

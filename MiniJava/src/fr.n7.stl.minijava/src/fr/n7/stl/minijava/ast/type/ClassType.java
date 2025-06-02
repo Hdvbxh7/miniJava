@@ -11,6 +11,7 @@ import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 public class ClassType implements Type {
 	
 	protected String name;
+	
 	public String getName() {
 		return name;
 	}

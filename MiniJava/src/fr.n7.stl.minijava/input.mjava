@@ -1,11 +1,13 @@
 class A {
 
-	public int v;
+	protected int v;
 	
 }
 
 class B extends A{
 	public int b;
+
+	public int d;
 }
 
 public class Main {
@@ -18,6 +20,7 @@ public class Main {
 		A a1 = new A();
 		a1.v = 5;
 		int b = a1.v;
+		print b;
 	}
 }
 		

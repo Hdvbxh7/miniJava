@@ -3,6 +3,7 @@
  */
 package fr.n7.stl.minijava.ast.type.declaration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
@@ -36,6 +37,8 @@ public class ClassDeclaration implements Instruction, Declaration {
 	
 	protected String ancestor;
 
+	private ClassDeclaration ancestorClass;
+
 	protected HierarchicalScope classScope;
 
 	protected Type type;
@@ -57,27 +60,16 @@ public class ClassDeclaration implements Instruction, Declaration {
 		this( _concrete, _name, null, _elements);
 	}
 
-	private boolean alreadyIn(ClassElement ce){
-		if (ce instanceof AttributeDeclaration eAttribute) {
-			for(ClassElement ceIn: elements){
-				if(ceIn instanceof AttributeDeclaration eAttributeIn){
-					if(ceIn.getName()==ce.getName()){
-						return true;
-					}
-				}
+	
+
+	public List<ConstructorDeclaration> getConstructors(String name){
+		ArrayList<ConstructorDeclaration> constructors = new ArrayList<ConstructorDeclaration>();
+		for(ClassElement ce : elements){
+			if(ce instanceof ConstructorDeclaration cd){
+				constructors.add(cd);
 			}
-		}else if (ce instanceof MethodDeclaration eMethod) {
-			for(ClassElement ceIn: elements){
-				if(ceIn instanceof MethodDeclaration eMethodIn){
-					if(ceIn.getName()==ce.getName()){
-						return true;
-					}
-				}
-			}
-		} else{
-			Logger.error("les elements explosent pour l'heritage de classDeclaration");
 		}
-		return false;
+		return constructors;
 	}
 
 	@Override
@@ -125,9 +117,17 @@ public class ClassDeclaration implements Instruction, Declaration {
 		if (this.ancestor != null && _scope.knows(this.ancestor)) {
 			Declaration ancestor = _scope.get(this.ancestor);
 			if(ancestor instanceof ClassDeclaration ancestorclass){
+				ancestorClass = ancestorclass;
 				for(ClassElement ceAn: ancestorclass.getElements()){
-					if(!alreadyIn(ceAn)){
-						elements.add(ceAn);
+					int index = alreadyIn(ceAn);
+					if(index==-1){
+						if(ceAn.getAccessRight()!=AccessRight.PRIVATE){
+							elements.add(ancestorclass.getElements().indexOf(ceAn),ceAn);
+						}
+					} else {
+						ClassElement classElement = elements.get(index);
+						elements.remove(index);
+						elements.add(ancestorclass.getElements().indexOf(ceAn),classElement);
 					}
 				}
 			}
@@ -171,6 +171,13 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
+		int off = 0;
+		for (ClassElement classElement : elements) {
+			if(classElement instanceof AttributeDeclaration attributed){
+				attributed.offset = off;
+				off += attributed.getType().length(); 
+			}
+		}
 		return 0;
 	}
 
@@ -192,6 +199,44 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	public String getAncestor() {
 		return ancestor;
+	}
+
+	private int alreadyIn(ClassElement ce){
+		if (ce instanceof AttributeDeclaration eAttribute) {
+			for(ClassElement ceIn: elements){
+				if(ceIn instanceof AttributeDeclaration eAttributeIn){
+					if(ceIn.getName().equals(ce.getName())){
+						return elements.indexOf(ceIn);
+					}
+				}
+			}
+		}else if (ce instanceof MethodDeclaration eMethod) {
+			for(ClassElement ceIn: elements){
+				if(ceIn instanceof MethodDeclaration eMethodIn){
+					if(ceIn.getName().equals(ce.getName())){
+						return elements.indexOf(ceIn);
+					}
+				}
+			}
+		} else{
+			Logger.error("les elements explosent pour l'heritage de classDeclaration");
+		}
+		return -1;
+	}
+
+	public AttributeDeclaration getAttribute(String nameatt){
+		for(ClassElement ceIn: elements){
+			if(ceIn instanceof AttributeDeclaration eAttributeIn){
+				if(eAttributeIn.getName().equals(nameatt)){
+					return eAttributeIn;
+				}
+			}
+		}
+		if(ancestorClass.getAttribute(nameatt)!=null){
+			Logger.error("attribut "+nameatt+" non accessible dans la classe "+name);
+		}
+		Logger.error("attribut "+nameatt+" non existant dans la classe "+name);
+		return null;
 	}
 	
 	@Override

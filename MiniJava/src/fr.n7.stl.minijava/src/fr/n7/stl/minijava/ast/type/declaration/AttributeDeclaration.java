@@ -6,6 +6,8 @@ public class AttributeDeclaration extends ClassElement {
 	
 	protected Type type;
 
+	public int offset=-1;
+
 	public AttributeDeclaration( String _name, Type _type) {
 		super(_name);
 		this.type = _type;
