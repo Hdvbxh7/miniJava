@@ -45,7 +45,9 @@ public class ObjectAllocation  implements AccessibleExpression, AssignableExpres
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode is not implemented in ObjectAllocation.");
+		Fragment fragment = _factory.createFragment();
+		declaration.getType().length();
+		return fragment;
 	}
 	
 	@Override

@@ -12,6 +12,7 @@ public class ClassType implements Type {
 	
 	protected String name;
 	protected ClassDeclaration declaration;
+	protected ClassType ancestor;
 
 	public ClassType(String _name) {
 		this.name = _name;
@@ -32,11 +33,12 @@ public class ClassType implements Type {
 			if(this.equalsTo(cother)){
 				return true;
 			} else{
-				throw new SemanticsUndefinedException("Héritage à faire dans classtype");
+				if(this.ancestor != null){
+					ancestor.compatibleWith(_other);
+				}
 			}
-		} else{
-			return false;
 		}
+		return false;
 	}
 
 	@Override
@@ -60,6 +62,13 @@ public class ClassType implements Type {
 		if(_scope.knows(name)){
 			if(_scope.get(name) instanceof ClassDeclaration cdec){
 				this.declaration = cdec;
+				if(declaration.getAncestor()!=null){
+					if(_scope.get(declaration.getAncestor()) instanceof ClassType atype){
+						this.ancestor = atype;
+						return true;
+					}
+					return false;
+				}
 				return true;
 			}
 		}

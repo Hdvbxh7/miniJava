@@ -38,6 +38,8 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	protected HierarchicalScope classScope;
 
+	protected Type type;
+
 	/**
 	 * 
 	 */
@@ -58,6 +60,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok = true;
+		type = new ClassType(name);
 		if (_scope.accepts(this)) {
 			if (this.ancestor == null || _scope.knows(this.ancestor)) {
 				_scope.register(this);
@@ -116,7 +119,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		return true;
+		return this.type.completeResolve(_scope);
 	}
 
 	@Override
@@ -151,7 +154,11 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public Type getType() {
-		return new ClassType(name);
+		return type;
+	}
+
+	public String getAncestor() {
+		return ancestor;
 	}
 	
 	@Override
