@@ -16,7 +16,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		A a1 = new A();
-		int b = a.v;
+		a1.v = 5;
+		int b = a1.v;
 	}
 }
 		

@@ -4,10 +4,12 @@ import fr.n7.stl.minic.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.minijava.ast.type.ClassType;
 import fr.n7.stl.minijava.expression.AbstractAttribute;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
+import fr.n7.stl.util.Logger;
 
 public class AttributeAccess extends AbstractAttribute<AccessibleExpression>  implements AccessibleExpression {
 
@@ -17,17 +19,23 @@ public class AttributeAccess extends AbstractAttribute<AccessibleExpression>  im
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in access.");
+		boolean ok = object.collectAndPartialResolve(_scope);
+		if(object.getType() instanceof ClassType cobj){
+			Declaration dec = _scope.get(object.toString());
+			
+		}
+		return ok;
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in access.");
+		return object.completeResolve(_scope);
 	}
 
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in access.");
+		System.out.println(name);
+		return attribute.getType();
 	}
 
 	@Override
