@@ -8,6 +8,7 @@ import fr.n7.stl.minic.ast.expression.assignable.AssignableExpression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
@@ -46,7 +47,8 @@ public class ObjectAllocation  implements AccessibleExpression, AssignableExpres
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment fragment = _factory.createFragment();
-		declaration.getType().length();
+		fragment.add(_factory.createLoadL(declaration.getType().length()));
+		fragment.add(Library.MAlloc);
 		return fragment;
 	}
 	

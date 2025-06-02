@@ -34,7 +34,7 @@ public class ClassType implements Type {
 				return true;
 			} else{
 				if(this.ancestor != null){
-					ancestor.compatibleWith(_other);
+					return ancestor.compatibleWith(_other);
 				}
 			}
 		}
@@ -54,6 +54,7 @@ public class ClassType implements Type {
 				length += eAttribute.getType().length();
 			}
 		}
+
 		return length;
 	}
 
@@ -63,7 +64,7 @@ public class ClassType implements Type {
 			if(_scope.get(name) instanceof ClassDeclaration cdec){
 				this.declaration = cdec;
 				if(declaration.getAncestor()!=null){
-					if(_scope.get(declaration.getAncestor()) instanceof ClassType atype){
+					if(_scope.get(declaration.getAncestor()).getType() instanceof ClassType atype){
 						this.ancestor = atype;
 						return true;
 					}

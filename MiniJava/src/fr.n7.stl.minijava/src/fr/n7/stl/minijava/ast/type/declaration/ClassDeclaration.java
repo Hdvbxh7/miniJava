@@ -57,6 +57,29 @@ public class ClassDeclaration implements Instruction, Declaration {
 		this( _concrete, _name, null, _elements);
 	}
 
+	private boolean alreadyIn(ClassElement ce){
+		if (ce instanceof AttributeDeclaration eAttribute) {
+			for(ClassElement ceIn: elements){
+				if(ceIn instanceof AttributeDeclaration eAttributeIn){
+					if(ceIn.getName()==ce.getName()){
+						return true;
+					}
+				}
+			}
+		}else if (ce instanceof MethodDeclaration eMethod) {
+			for(ClassElement ceIn: elements){
+				if(ceIn instanceof MethodDeclaration eMethodIn){
+					if(ceIn.getName()==ce.getName()){
+						return true;
+					}
+				}
+			}
+		} else{
+			Logger.error("les elements explosent pour l'heritage de classDeclaration");
+		}
+		return false;
+	}
+
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok = true;
@@ -96,6 +119,16 @@ public class ClassDeclaration implements Instruction, Declaration {
 					classScope.register(eMethod);
 				} else {
 					Logger.error("Method " + eMethod.getName() + " is already defined in class " + this.name);
+				}
+			}
+		}
+		if (this.ancestor != null && _scope.knows(this.ancestor)) {
+			Declaration ancestor = _scope.get(this.ancestor);
+			if(ancestor instanceof ClassDeclaration ancestorclass){
+				for(ClassElement ceAn: ancestorclass.getElements()){
+					if(!alreadyIn(ceAn)){
+						elements.add(ceAn);
+					}
 				}
 			}
 		}

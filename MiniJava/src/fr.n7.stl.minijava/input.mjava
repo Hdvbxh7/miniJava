@@ -4,6 +4,10 @@ class A {
 	
 }
 
+class B extends A{
+	public int b;
+}
+
 public class Main {
 
 	static int succ(int i) {
@@ -11,8 +15,8 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-
 		A a1 = new A();
+		int b = a.v;
 	}
 }
 		
