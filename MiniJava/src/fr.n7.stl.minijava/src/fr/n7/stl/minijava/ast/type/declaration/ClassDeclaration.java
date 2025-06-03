@@ -15,6 +15,7 @@ import fr.n7.stl.minic.ast.scope.Scope;
 import fr.n7.stl.minic.ast.scope.SymbolTable;
 import fr.n7.stl.util.Logger;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
 import fr.n7.stl.minijava.ast.type.ClassType;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
@@ -84,7 +85,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 			Logger.error("Class " + this.name + " Is already defined");
 		}
 
-		classScope = new SymbolTable(_scope);
+		classScope = new ClassSymbolTable(this,_scope);
 
 		for (ClassElement element : this.elements) {
 			if (element instanceof AttributeDeclaration eAttribute) {

@@ -24,6 +24,10 @@ public class VariableAssignment extends AbstractIdentifier implements Assignable
 	
 	protected VariableDeclaration declaration;
 
+	public VariableDeclaration getDeclaration() {
+		return declaration;
+	}
+
 	/**
 	 * Creates a variable assignment expression Abstract Syntax Tree node.
 	 * @param _name Name of the assigned variable.

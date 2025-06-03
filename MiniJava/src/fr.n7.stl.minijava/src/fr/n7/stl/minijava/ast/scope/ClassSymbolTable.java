@@ -21,10 +21,11 @@ public class ClassSymbolTable implements HierarchicalScope<Declaration> {
         public ClassSymbolTable() {
         }
 
-        public ClassSymbolTable(ClassDeclaration cd){
+        public ClassSymbolTable(ClassDeclaration cd,Scope<Declaration> _context){
             this.classD = cd;
             this.declarations = new HashMap<String,Declaration>();
             this.constructorDeclarations = cd.getConstructors();
+            this.context = _context;
         }
         
         public ClassSymbolTable(Scope<Declaration> _context) {

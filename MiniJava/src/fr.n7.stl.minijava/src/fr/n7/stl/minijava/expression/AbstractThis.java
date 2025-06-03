@@ -16,6 +16,7 @@ public abstract class AbstractThis <ObjectKind extends Expression> implements Ex
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
+		System.out.println(_scope.getClass());
 		return true;
 	}
 
