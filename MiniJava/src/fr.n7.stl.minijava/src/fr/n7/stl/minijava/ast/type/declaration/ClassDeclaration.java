@@ -219,6 +219,15 @@ public class ClassDeclaration implements Instruction, Declaration {
 		return null;
 	}
 	
+	public MethodDeclaration getMethod(String name){
+		for(ClassElement element: this.elements){
+			if(element instanceof MethodDeclaration method && method.getName().equals(name)){
+				return method;
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public String toString() {
 		String image = "";
