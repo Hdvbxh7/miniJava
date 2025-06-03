@@ -4,6 +4,9 @@ class A {
 	public A(int b){
 		this.v=a;
 	}
+	public void setV(int _v) {
+		this.v = _v;
+	}
 	
 }
 
@@ -24,7 +27,7 @@ public class Main {
 		a1.v = 5;
 		int b = a1.v;
 		int c = b2.v;
+		a1.setV(4);
 		print b;
 	}
 }
-		
