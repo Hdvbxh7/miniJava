@@ -31,19 +31,20 @@ public abstract class AbstractThis <ObjectKind extends Expression> implements Ex
 				scope = sscope.getContext();
 			} else {
 				Logger.error("This ne peut être utilisé que dans les classes");
+				ok = false;
 			}
 		}
-		return false;
-	}
-
-	@Override
-	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		return true;
 	}
 
 	@Override
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		return false;
+	}
+
+	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in this.");
+		return object.getType();
 	}
 	
 	@Override

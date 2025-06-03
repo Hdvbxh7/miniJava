@@ -7,7 +7,9 @@ import fr.n7.stl.minic.ast.Block;
 import fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
+import fr.n7.stl.util.Logger;
 
 public class MethodDeclaration  extends ClassElement {
 	
@@ -31,6 +33,26 @@ public class MethodDeclaration  extends ClassElement {
 		this( _name, _type, _parameters, null);
 	}
 
+	@Override
+	public boolean collectAndPartialResolve(ClassSymbolTable _scope){
+		if (_scope.accepts(this)) {
+			_scope.register(this);
+			return true;
+		} else {
+			Logger.error("Method " + this.name + " is already defined in class " + _scope.getClassD().getName());
+		}
+		return false;
+	};
+
+	@Override
+	public boolean completeResolve(ClassSymbolTable _scope){
+		return true;
+	};
+
+	@Override
+	public boolean checkType(){
+		return true;
+	}
 	
 	@Override
 	public String toString() {

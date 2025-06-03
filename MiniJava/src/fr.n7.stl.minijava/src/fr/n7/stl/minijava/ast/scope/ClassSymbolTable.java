@@ -2,6 +2,7 @@ package fr.n7.stl.minijava.ast.scope;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -10,6 +11,9 @@ import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.scope.Scope;
 import fr.n7.stl.minijava.ast.type.declaration.ClassDeclaration;
 import fr.n7.stl.minijava.ast.type.declaration.ConstructorDeclaration;
+import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
+import fr.n7.stl.util.Logger;
+
 
 public class ClassSymbolTable implements HierarchicalScope<Declaration> {
         
@@ -30,7 +34,7 @@ public class ClassSymbolTable implements HierarchicalScope<Declaration> {
         public ClassSymbolTable(ClassDeclaration cd,Scope<Declaration> _context){
             this.classD = cd;
             this.declarations = new HashMap<String,Declaration>();
-            this.constructorDeclarations = cd.getConstructors();
+            this.constructorDeclarations = new ArrayList<ConstructorDeclaration>();
             this.context = _context;
         }
         
@@ -68,7 +72,27 @@ public class ClassSymbolTable implements HierarchicalScope<Declaration> {
          */
         @Override
         public boolean accepts(Declaration _declaration) {
-            return (! this.contains(_declaration.getName()));
+            if(_declaration instanceof ConstructorDeclaration cdec){
+                if(cdec.getName().equals(classD.getName())){
+                    List<ParameterDeclaration> paramList = cdec.getParameters();
+                    for(ConstructorDeclaration cdIn : constructorDeclarations){
+                        if(cdIn.getParameters().size()==paramList.size()){
+                            boolean ok = true;
+                            for(int i=0;i<cdIn.getParameters().size();i++){
+                                if(!(cdIn.getParameters().get(i).getType().compatibleWith(paramList.get(i).getType()))){
+                                    ok= false;
+                                }
+                            }
+                            if(ok){
+                                Logger.error("Constructeurs déja existant \n "+cdec.toString());
+                            }
+                        } 
+                    }
+                }
+                return true;
+            }else{
+                return (!this.contains(_declaration.getName()));
+            }
         }
     
         /* (non-Javadoc)
@@ -77,7 +101,7 @@ public class ClassSymbolTable implements HierarchicalScope<Declaration> {
         @Override
         public void register(Declaration _declaration) {
             if(_declaration instanceof ConstructorDeclaration cdecl){
-                
+                this.constructorDeclarations.add(cdecl);
             } else {
                 if (this.accepts(_declaration)) {
                     this.declarations.put(_declaration.getName(), _declaration);

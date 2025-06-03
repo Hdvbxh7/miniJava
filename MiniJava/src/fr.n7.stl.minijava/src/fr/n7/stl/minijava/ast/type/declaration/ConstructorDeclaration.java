@@ -6,19 +6,66 @@ import java.util.List;
 import fr.n7.stl.minic.ast.Block;
 import fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
+import fr.n7.stl.minic.ast.scope.Declaration;
+import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
+import fr.n7.stl.util.Logger;
+import fr.n7.stl.minic.ast.scope.SymbolTable;
 
 public class ConstructorDeclaration extends ClassElement {
 	
 	protected List<ParameterDeclaration> parameters;
 	
+	public List<ParameterDeclaration> getParameters() {
+		return parameters;
+	}
+
 	protected Block body;
+
+	protected ClassDeclaration classDec;
+
+	protected HierarchicalScope<Declaration> localScope;
 
 	public ConstructorDeclaration(String _name, List<ParameterDeclaration> _parameters, Block _body) {
 		super( _name);
 		this.parameters = _parameters;
 		this.body = _body;
+	}
+
+	@Override
+	public boolean collectAndPartialResolve(ClassSymbolTable _scope){
+		boolean ok = true;
+		if(_scope.accepts(this)) {
+			_scope.register(this);
+			ok = ok && true;
+		} else {
+			Logger.warning("Variable" + this.name + "Is already defined");
+			return false;
+		}	
+		this.localScope = new SymbolTable(_scope);
+		for(ParameterDeclaration p : parameters){
+			if(this.localScope .accepts(p)) {
+				this.localScope .register(p);
+				ok = ok && true;
+			} else {
+				Logger.warning("Parameter " + p.getName() + "Is already defined");
+				ok = ok && false;
+			}
+		}
+		return ok && this.body.collectAndPartialResolve(localScope);
+	};
+
+	@Override
+	public boolean completeResolve(ClassSymbolTable _scope){
+		return body.completeResolve(this.localScope);
+
+	};
+
+	@Override
+	public boolean checkType(){
+		return true;
 	}
 
 	@Override

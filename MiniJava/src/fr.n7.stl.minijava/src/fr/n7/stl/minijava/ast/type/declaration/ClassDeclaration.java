@@ -40,7 +40,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	private ClassDeclaration ancestorClass;
 
-	protected HierarchicalScope classScope;
+	protected ClassSymbolTable classScope;
 
 	protected Type type;
 
@@ -88,50 +88,8 @@ public class ClassDeclaration implements Instruction, Declaration {
 		classScope = new ClassSymbolTable(this,_scope);
 
 		for (ClassElement element : this.elements) {
-			if (element instanceof AttributeDeclaration eAttribute) {
-
-				if (classScope.accepts(eAttribute)) {
-					classScope.register(eAttribute);
-					ok = ok && eAttribute.getType().completeResolve(classScope);
-				} else {
-					Logger.error("Attribute " + eAttribute.getName() + " is already defined in class " + this.name);
-				}
-
-			} else if (element instanceof ConstructorDeclaration eConstructor) {
-
-				if (classScope.accepts(eConstructor)) {
-					classScope.register(eConstructor);
-					ok = ok && eConstructor.body.collectAndPartialResolve(classScope);
-				} else {
-					Logger.error("Constructor " + eConstructor.getName() + " is already defined in class " + this.name);
-				}
-				
-			} else if (element instanceof MethodDeclaration eMethod) {
-
-				if (classScope.accepts(eMethod)) {
-					classScope.register(eMethod);
-				} else {
-					Logger.error("Method " + eMethod.getName() + " is already defined in class " + this.name);
-				}
-			}
+			element.collectAndPartialResolve(classScope);
 		}
-		if (this.ancestor != null && _scope.knows(this.ancestor)) {
-			Declaration ancestor = _scope.get(this.ancestor);
-			if(ancestor instanceof ClassDeclaration ancestorclass){
-				ancestorClass = ancestorclass;
-				for(ClassElement ceAn: ancestorclass.getElements()){
-					int index = alreadyIn(ceAn);
-					if(index==-1){
-						elements.add(ancestorclass.getElements().indexOf(ceAn),ceAn);
-					} else {
-						ClassElement classElement = elements.get(index);
-						elements.remove(index);
-						elements.add(ancestorclass.getElements().indexOf(ceAn),classElement);
-					}
-				}
-			}
-		}
-
 		return true;
 		
 	}
@@ -151,6 +109,25 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
+		for (ClassElement element : this.elements) {
+			element.completeResolve(classScope);
+		}
+		if (this.ancestor != null && _scope.knows(this.ancestor)) {
+			Declaration ancestor = _scope.get(this.ancestor);
+			if(ancestor instanceof ClassDeclaration ancestorclass){
+				ancestorClass = ancestorclass;
+				for(ClassElement ceAn: ancestorclass.getElements()){
+					int index = alreadyIn(ceAn);
+					if(index==-1){
+						elements.add(ancestorclass.getElements().indexOf(ceAn),ceAn);
+					} else {
+						ClassElement classElement = elements.get(index);
+						elements.remove(index);
+						elements.add(ancestorclass.getElements().indexOf(ceAn),classElement);
+					}
+				}
+			}
+		}
 		return this.type.completeResolve(_scope);
 	}
 
@@ -158,11 +135,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 	public boolean checkType() {
 		boolean ok = true;
 		for (ClassElement element : this.elements) {
-			if (element instanceof ConstructorDeclaration eConstructor) {
-					ok = ok && eConstructor.body.checkType();
-			} else if (element instanceof MethodDeclaration eMethod) {
-					ok = ok && eMethod.body.checkType();
-			}
+			element.checkType();
 		}
 
 		return ok;
@@ -217,7 +190,15 @@ public class ClassDeclaration implements Instruction, Declaration {
 					}
 				}
 			}
-		} else{
+		} else if (ce instanceof ConstructorDeclaration eConstructor) {
+			for(ClassElement ceIn: elements){
+				if(ceIn instanceof MethodDeclaration eConstructorIn){
+					if(ceIn.getName().equals(ce.getName())){
+						return elements.indexOf(ceIn);
+					}
+				}
+			}
+		}else{
 			Logger.error("les elements explosent pour l'heritage de classDeclaration");
 		}
 		return -1;

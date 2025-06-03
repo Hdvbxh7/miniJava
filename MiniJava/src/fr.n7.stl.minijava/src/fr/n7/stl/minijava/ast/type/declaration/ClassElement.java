@@ -1,6 +1,10 @@
 package fr.n7.stl.minijava.ast.type.declaration;
 
+import fr.n7.stl.minijava.ast.type.declaration.ElementKind;
+
 import fr.n7.stl.minic.ast.scope.Declaration;
+import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
+import fr.n7.stl.util.Logger;
 
 public abstract class ClassElement  implements Declaration {
 	
@@ -15,9 +19,21 @@ public abstract class ClassElement  implements Declaration {
 		this.accessRight = _accessRight; 
 		this.name = _name;
 	}
+
+	public boolean collectAndPartialResolve(ClassSymbolTable _scope){
+		return false;
+	};
+
+	public boolean completeResolve(ClassSymbolTable _scope){
+		return false;
+	};
+
+	public boolean checkType(){
+		return false;
+	}
 	
 	public ClassElement(String _name) {
-		this( ElementKind.OBJECT, AccessRight.PACKAGE, _name);
+		this(ElementKind.OBJECT, AccessRight.PACKAGE, _name);
 	}
 	
 	public ElementKind getElementKind() {

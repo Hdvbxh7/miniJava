@@ -5,14 +5,19 @@ import java.util.List;
 
 import fr.n7.stl.minic.ast.expression.accessible.AccessibleExpression;
 import fr.n7.stl.minic.ast.expression.assignable.AssignableExpression;
+import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
 import fr.n7.stl.minijava.ast.type.ClassType;
+import fr.n7.stl.minijava.ast.type.declaration.ClassDeclaration;
+import fr.n7.stl.minijava.ast.type.declaration.ConstructorDeclaration;
 import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
+import fr.n7.stl.util.Logger;
 
 public class ObjectAllocation  implements AccessibleExpression, AssignableExpression {
 	
@@ -28,9 +33,32 @@ public class ObjectAllocation  implements AccessibleExpression, AssignableExpres
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		if(_scope.knows(name)){
+		if(_scope.knows(name) && arguments.isEmpty()){
 			this.declaration = _scope.get(name);
 			return true;
+		} else if(_scope.knows(name)){
+			boolean valider = false;
+			if(declaration instanceof ClassDeclaration classDeclaration){
+				for(ConstructorDeclaration cd: classDeclaration.getConstructors()){
+					List<ParameterDeclaration> paramList = cd.getParameters();
+					if(arguments.size()==paramList.size()){
+						boolean ok = true;
+						for(int i=0;i<arguments.size();i++){
+							if(!(arguments.get(i).getType().compatibleWith(paramList.get(i).getType()))){
+								ok= false;
+							}
+						}
+						if(ok){
+							declaration=cd;
+							valider = true;
+						}
+					} else{
+						Logger.error("Les paramétres ne correspondent pas aux arguments pour la fonction" + toString());
+					}
+				}
+			}
+			System.out.println(valider);
+			return valider;
 		}
 		return false;
 	}

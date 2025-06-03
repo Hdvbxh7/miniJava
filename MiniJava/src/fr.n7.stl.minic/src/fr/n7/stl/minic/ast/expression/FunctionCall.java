@@ -108,6 +108,15 @@ public class FunctionCall implements AccessibleExpression {
 	 */
 	@Override
 	public Type getType() {
+		if(arguments.size()==function.getParameters().size()){
+			for(int i=0;i<arguments.size();i++){
+				if(!(arguments.get(i).getType().compatibleWith(function.getParameters().get(i).getType()))){
+					Logger.error("Les paramétres ne correspondent pas aux arguments pour la fonction" + toString());
+				}
+			}
+		} else{
+			Logger.error("Les paramétres ne correspondent pas aux arguments pour la fonction" + toString());
+		}
 		return function.getType();
 	}
 

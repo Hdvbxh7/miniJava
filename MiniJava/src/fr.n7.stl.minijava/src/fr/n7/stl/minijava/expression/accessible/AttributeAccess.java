@@ -22,23 +22,21 @@ public class AttributeAccess extends AbstractAttribute<AccessibleExpression>  im
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		boolean ok =true;
-		ok = ok && this.object.collectAndPartialResolve(_scope);
-		ok = ok && this.object.getType().completeResolve(_scope);	
+		boolean ok = (this.object.collectAndPartialResolve(_scope) && this.object.getType().completeResolve(_scope));
+		return ok;
+	}
+
+	@Override
+	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		if(this.object.getType() instanceof ClassType cobject){
 			if((_scope.knows(cobject.getName()) && (_scope.get(cobject.getName()) instanceof ClassDeclaration cdec))){
 				attribute = cdec.getAttribute(name);
 				if(attribute.getAccessRight()==AccessRight.PROTECTED||attribute.getAccessRight()==AccessRight.PRIVATE){
 					Logger.error("L'attribut "+ attribute.getName() +" de la classe "+object.toString() +" est inaccesssible");
 				}
-				return ok;
+				return true;
 			}
 		}
-		return false;
-	}
-
-	@Override
-	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		return object.completeResolve(_scope);
 	}
 

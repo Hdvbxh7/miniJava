@@ -1,7 +1,9 @@
 class A {
 
 	public int v;
-
+	public B(int b){
+		this.v=a;
+	}
 	
 }
 
@@ -22,7 +24,6 @@ public class Main {
 		a1.v = 5;
 		int b = a1.v;
 		int c = b2.v;
-		int j = this.v;
 		print b;
 	}
 }
