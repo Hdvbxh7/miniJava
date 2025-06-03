@@ -33,6 +33,10 @@ public class MethodDeclaration  extends ClassElement {
 		this( _name, _type, _parameters, null);
 	}
 
+	public List<ParameterDeclaration> getParameters() {
+		return this.parameters;
+	}
+
 	@Override
 	public boolean collectAndPartialResolve(ClassSymbolTable _scope){
 		if (_scope.accepts(this)) {
