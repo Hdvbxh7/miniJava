@@ -15,6 +15,8 @@ import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
+import fr.n7.stl.minijava.ast.type.ClassType;
+import fr.n7.stl.minijava.ast.type.declaration.ClassDeclaration;
 
 public abstract class AbstractMethodCall <ObjectKind extends Expression> implements Expression {
 	
@@ -58,10 +60,34 @@ public abstract class AbstractMethodCall <ObjectKind extends Expression> impleme
 		for (AccessibleExpression expr : this.arguments) {
 			result = result && expr.completeResolve(_scope);
 		}
+		Type objectType;
 
 		if (this.target != null) {
 			result = result && this.target.completeResolve(_scope);
+			objectType = this.target.getType();
 			
+		} else {
+			Declaration thisDecl = _scope.get("this");
+			if (thisDecl == null || !(thisDecl.getType() instanceof ClassType )) {
+				System.err.println("Erreur : appel à une méthode sans cible, et this n'est pas dans le scope.");
+				return false;
+			}
+			objectType = thisDecl.getType();
+		}
+		if (!(objectType instanceof ClassType classType)) {
+			System.err.println("Erreur : le type de l'objet n'est pas une classe.");
+			return false;
+		}
+
+		ClassDeclaration classDecl = classType.getDeclaration();
+		if (classDecl == null) {
+			System.err.println("Erreur : aucune déclaration pour le type " + classType.getName());
+			return false;
+		}
+		this.declaration = classDecl.getMethod(this.name);
+		if (this.declaration == null) {
+			System.err.println("Erreur : la méthode '" + this.name +"' est introuvable dans la classe.");
+			return false;
 		}
 
 		return result;
