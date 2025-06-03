@@ -233,7 +233,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 				}
 			}
 		}
-		if(ancestorClass.getAttribute(nameatt)!=null){
+		if(ancestorClass!=null && ancestorClass.getAttribute(nameatt)!=null){
 			Logger.error("attribut "+nameatt+" non accessible dans la classe "+name);
 		}
 		Logger.error("attribut "+nameatt+" non existant dans la classe "+name);

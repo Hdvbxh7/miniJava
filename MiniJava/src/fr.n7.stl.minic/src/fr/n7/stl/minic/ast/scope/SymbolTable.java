@@ -17,6 +17,10 @@ public class SymbolTable implements HierarchicalScope<Declaration> {
 	private Map<String, Declaration> declarations;
 	private Scope<Declaration> context;
 
+	public Scope<Declaration> getContext() {
+		return context;
+	}
+
 	public SymbolTable() {
 		this( null );
 	}

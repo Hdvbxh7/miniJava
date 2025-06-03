@@ -4,11 +4,13 @@ import fr.n7.stl.minic.ast.expression.Expression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;
+import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
+import fr.n7.stl.minijava.ast.type.declaration.ClassDeclaration;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public abstract class AbstractThis <ObjectKind extends Expression> implements Expression {
 
-	protected ObjectKind object;
+	protected ClassDeclaration object;
 
 	public AbstractThis() {
 		// TODO Auto-generated constructor stub
@@ -16,7 +18,12 @@ public abstract class AbstractThis <ObjectKind extends Expression> implements Ex
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		System.out.println(_scope.getClass());
+		boolean ok = true;
+		while (ok) {
+			if(_scope instanceof ClassSymbolTable cscope){
+				
+			}
+		}
 		return true;
 	}
 
