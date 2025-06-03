@@ -59,13 +59,18 @@ public class ConstructorDeclaration extends ClassElement {
 
 	@Override
 	public boolean completeResolve(ClassSymbolTable _scope){
+		this.classDec = _scope.getClassD();
 		return body.completeResolve(this.localScope);
 
 	};
 
 	@Override
 	public boolean checkType(){
-		return true;
+		if(classDec.getName().equals(this.name)){
+			return true;
+		}
+		Logger.error("Le constructeur n'est pas du bon type");
+		return false;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 class A {
 
 	public int v;
-	public B(int b){
+	public A(int b){
 		this.v=a;
 	}
 	
