@@ -3,10 +3,13 @@ package fr.n7.stl.minijava.expression;
 import fr.n7.stl.minic.ast.expression.Expression;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
+import fr.n7.stl.minic.ast.scope.Scope;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
+import fr.n7.stl.minic.ast.scope.SymbolTable;
 import fr.n7.stl.minijava.ast.type.declaration.ClassDeclaration;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
+import fr.n7.stl.util.Logger;
 
 public abstract class AbstractThis <ObjectKind extends Expression> implements Expression {
 
@@ -19,12 +22,18 @@ public abstract class AbstractThis <ObjectKind extends Expression> implements Ex
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok = true;
+		Scope<Declaration> scope = _scope;
 		while (ok) {
-			if(_scope instanceof ClassSymbolTable cscope){
-				object = csope.getClass();
+			if(scope instanceof ClassSymbolTable cscope){
+				object = cscope.getClassD();
+				return true;
+			} else if(scope instanceof SymbolTable sscope){
+				scope = sscope.getContext();
+			} else {
+				Logger.error("This ne peut être utilisé que dans les classes");
 			}
 		}
-		return true;
+		return false;
 	}
 
 	@Override

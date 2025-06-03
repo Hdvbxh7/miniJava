@@ -16,6 +16,12 @@ public class ClassSymbolTable implements HierarchicalScope<Declaration> {
         private Map<String, Declaration> declarations;
         private ArrayList<ConstructorDeclaration> constructorDeclarations;
         protected ClassDeclaration classD;
+        
+        public ClassDeclaration getClassD() {
+            return classD;
+        }
+
+
         private Scope<Declaration> context;
     
         public ClassSymbolTable() {
