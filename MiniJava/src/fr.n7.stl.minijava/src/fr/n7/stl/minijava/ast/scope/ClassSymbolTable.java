@@ -24,7 +24,7 @@ public class ClassSymbolTable implements HierarchicalScope<Declaration> {
         public ClassSymbolTable(ClassDeclaration cd){
             this.classD = cd;
             this.declarations = new HashMap<String,Declaration>();
-            this.constructorDeclarations = new ArrayList<ConstructorDeclaration>();
+            this.constructorDeclarations = cd.getConstructors();
         }
         
         public ClassSymbolTable(Scope<Declaration> _context) {

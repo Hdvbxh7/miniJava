@@ -62,7 +62,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	
 
-	public List<ConstructorDeclaration> getConstructors(String name){
+	public ArrayList<ConstructorDeclaration> getConstructors(){
 		ArrayList<ConstructorDeclaration> constructors = new ArrayList<ConstructorDeclaration>();
 		for(ClassElement ce : elements){
 			if(ce instanceof ConstructorDeclaration cd){

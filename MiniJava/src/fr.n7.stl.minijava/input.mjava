@@ -1,12 +1,15 @@
 class A {
 
-	protected int v;
+	public int v;
+
+	public A(int a){
+		this.v=a;
+	}
 	
 }
 
 class B extends A{
 	public int b;
-
 	public int d;
 }
 
@@ -18,8 +21,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		A a1 = new A();
+		B b2 = new B();
 		a1.v = 5;
 		int b = a1.v;
+		int c = b2.v;
 		print b;
 	}
 }

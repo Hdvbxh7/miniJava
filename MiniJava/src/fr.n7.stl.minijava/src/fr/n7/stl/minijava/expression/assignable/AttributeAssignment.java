@@ -1,6 +1,7 @@
 package fr.n7.stl.minijava.expression.assignable;
 
 import fr.n7.stl.minic.ast.expression.assignable.AssignableExpression;
+import fr.n7.stl.minic.ast.expression.assignable.VariableAssignment;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.Type;

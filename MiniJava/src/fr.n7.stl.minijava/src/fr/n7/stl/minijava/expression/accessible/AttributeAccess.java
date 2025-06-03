@@ -28,7 +28,7 @@ public class AttributeAccess extends AbstractAttribute<AccessibleExpression>  im
 		if(this.object.getType() instanceof ClassType cobject){
 			if((_scope.knows(cobject.getName()) && (_scope.get(cobject.getName()) instanceof ClassDeclaration cdec))){
 				attribute = cdec.getAttribute(name);
-				if(attribute.getAccessRight()==AccessRight.PROTECTED){
+				if(attribute.getAccessRight()==AccessRight.PROTECTED||attribute.getAccessRight()==AccessRight.PRIVATE){
 					Logger.error("L'attribut "+ attribute.getName() +" de la classe "+object.toString() +" est inaccesssible");
 				}
 				return ok;

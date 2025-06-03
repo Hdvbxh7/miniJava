@@ -10,6 +10,10 @@ PUSH 1
 LOADL 1
 SUBR MAlloc
 STORE (1) 0[SB]
+PUSH 3
+LOADL 3
+SUBR MAlloc
+STORE (3) 1[SB]
 ; a1 .v = 5;
 
 LOADL 5
@@ -18,17 +22,24 @@ LOADL 0
 SUBR IAdd
 STOREI (1)
 PUSH 1
-;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@5c0369c4
+;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@5ecddf8f
 LOAD (1) 0[SB]
 LOADL 0
 SUBR IAdd
 LOADI (1)
-STORE (1) 1[SB]
-;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@2be94b0f
+STORE (1) 4[SB]
+PUSH 1
+;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@3f102e87
+LOAD (3) 1[SB]
+LOADL 0
+SUBR IAdd
+LOADI (1)
+STORE (1) 5[SB]
+;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@27abe2cd
 ;print b;
 
-LOAD (1) 1[SB]
+LOAD (1) 4[SB]
 SUBR IOut
-POP (0) 2
+POP (0) 6
 HALT
 

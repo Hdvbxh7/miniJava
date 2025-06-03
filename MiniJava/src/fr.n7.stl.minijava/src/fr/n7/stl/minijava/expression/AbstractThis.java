@@ -8,18 +8,20 @@ import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 
 public abstract class AbstractThis <ObjectKind extends Expression> implements Expression {
 
+	protected ObjectKind object;
+
 	public AbstractThis() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in this.");
+		return true;
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in this.");
+		return true;
 	}
 
 	@Override
