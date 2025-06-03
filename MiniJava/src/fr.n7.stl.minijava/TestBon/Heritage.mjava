@@ -4,15 +4,20 @@ class A {
 	
 }
 
+class B extends A{
+	
+	public int d;
+
+}
+
 
 
 public class Main {
 
 	public static void main(String[] args) {
-        A a1 = new A();
-
-        a.v = 5;
-        print a.v
+        A a1 = new B();
+        a1.d = 8;
+        print a1.v;
         
 	}
 }

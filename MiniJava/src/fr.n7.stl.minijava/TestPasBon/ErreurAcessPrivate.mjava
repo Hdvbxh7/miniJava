@@ -1,6 +1,6 @@
 class A {
 
-	public int v;
+	private int v;
 	
 }
 
@@ -10,9 +10,8 @@ public class Main {
 
 	public static void main(String[] args) {
         A a1 = new A();
-
-        a.v = 5;
-        print a.v
+        a1.v = 8;
+        print a1.v;
         
 	}
 }

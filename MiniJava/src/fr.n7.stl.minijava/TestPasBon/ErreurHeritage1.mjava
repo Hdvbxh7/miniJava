@@ -1,0 +1,15 @@
+class B extends A {
+	
+	public int d;
+
+}
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+        A a1 = new B();
+        
+	}
+}

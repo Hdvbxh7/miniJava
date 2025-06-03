@@ -1,0 +1,32 @@
+;Classe : A
+JUMP SKIPCONSTRUCTORA1
+CONSTRUCTORA1
+;this.v = a;
+
+LOAD (1) -2[LB]
+LOAD (1) -1[LB]
+LOADL 0
+SUBR IAdd
+STOREI (1)
+LOAD (1) -1[LB]
+RETURN (1) 1
+SKIPCONSTRUCTORA1
+;Classe : B
+PUSH 0
+PUSH 1
+LOADL 12
+LOADL 1
+SUBR MAlloc
+CALL (LB) CONSTRUCTORA1
+STORE (1) 0[SB]
+;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@6979e8cb
+;print a1.v;
+
+LOAD (1) 0[SB]
+LOADL 0
+SUBR IAdd
+LOADI (1)
+SUBR IOut
+POP (0) 1
+HALT
+

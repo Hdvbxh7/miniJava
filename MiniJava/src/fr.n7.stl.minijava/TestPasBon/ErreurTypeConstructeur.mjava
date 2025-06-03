@@ -1,6 +1,8 @@
 class A {
 
 	public int v;
+
+    public B(int j) {}
 	
 }
 
@@ -10,9 +12,5 @@ public class Main {
 
 	public static void main(String[] args) {
         A a1 = new A();
-
-        a.v = 5;
-        print a.v
-        
 	}
 }

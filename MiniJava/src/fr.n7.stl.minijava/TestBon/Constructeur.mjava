@@ -1,0 +1,26 @@
+class A {
+
+	public int v;
+
+    public A(int a) {
+        this.v = a;
+    }
+	
+}
+
+class B extends A{
+	
+	public int d;
+
+}
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+        A a1 = new A(12);
+        print a1.v;
+        
+	}
+}
