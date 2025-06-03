@@ -122,9 +122,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 				for(ClassElement ceAn: ancestorclass.getElements()){
 					int index = alreadyIn(ceAn);
 					if(index==-1){
-						if(ceAn.getAccessRight()!=AccessRight.PRIVATE){
-							elements.add(ancestorclass.getElements().indexOf(ceAn),ceAn);
-						}
+						elements.add(ancestorclass.getElements().indexOf(ceAn),ceAn);
 					} else {
 						ClassElement classElement = elements.get(index);
 						elements.remove(index);

@@ -21,7 +21,7 @@ public abstract class AbstractThis <ObjectKind extends Expression> implements Ex
 		boolean ok = true;
 		while (ok) {
 			if(_scope instanceof ClassSymbolTable cscope){
-				
+				object = csope.getClass();
 			}
 		}
 		return true;
