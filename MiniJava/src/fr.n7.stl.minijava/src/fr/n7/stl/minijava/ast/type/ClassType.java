@@ -53,6 +53,10 @@ public class ClassType implements Type {
 
 	@Override
 	public int length() {
+		return 1;
+	}
+
+	public int lengthAttr() {
 		int length = 0;
 		for (ClassElement element : declaration.getElements()) {
 			if (element instanceof AttributeDeclaration eAttribute) {

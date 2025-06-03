@@ -2,9 +2,6 @@ class A {
 
 	public int v;
 
-	public A(int a){
-		this.v=a;
-	}
 	
 }
 
