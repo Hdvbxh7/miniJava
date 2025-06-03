@@ -38,17 +38,40 @@ public abstract class AbstractMethodCall <ObjectKind extends Expression> impleme
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in AbstractMethodCall.");
+		// throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in AbstractMethodCall.");
+		boolean result = true;
+		for (AccessibleExpression expr : this.arguments) {
+			result = result && expr.collectAndPartialResolve(_scope);
+		}
+
+		if (this.target != null) {
+			result = result && this.target.collectAndPartialResolve(_scope);
+		}
+
+		return result;
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in AbstractMethodCall.");
+		boolean result = true;
+
+		for (AccessibleExpression expr : this.arguments) {
+			result = result && expr.completeResolve(_scope);
+		}
+
+		if (this.target != null) {
+			result = result && this.target.completeResolve(_scope);
+			
+		}
+
+		return result;
 	}
 
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in AbstractMethodCall.");
+
+		return this.declaration.getType();
+		
 	}
 	
 	@Override
