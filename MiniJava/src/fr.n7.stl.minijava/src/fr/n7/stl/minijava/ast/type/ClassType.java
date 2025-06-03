@@ -23,6 +23,10 @@ public class ClassType implements Type {
 		this.name = _name;
 	}
 
+	public ClassDeclaration getDeclaration() {
+		return this.declaration;
+	}
+
 	@Override
 	public boolean equalsTo(Type _other) {
 		if(_other instanceof ClassType cother){
