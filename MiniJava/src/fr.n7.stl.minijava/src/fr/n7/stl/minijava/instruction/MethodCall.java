@@ -14,6 +14,8 @@ import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
+import fr.n7.stl.minijava.ast.type.ClassType;
+import fr.n7.stl.minijava.ast.type.declaration.ClassDeclaration;
 
 public class MethodCall implements Instruction {
 	
@@ -38,32 +40,87 @@ public class MethodCall implements Instruction {
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics collectAndPartialResolve is not implemented in MethodCall.");
+		boolean result = true;
+		if (this.target != null) {
+			result = this.target.collectAndPartialResolve(_scope);
+		}
+		for (AccessibleExpression arg : this.arguments) {
+			result &= arg.collectAndPartialResolve(_scope);
+		}
+		return result;
 	}
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope, FunctionDeclaration _container) {
-		throw new SemanticsUndefinedException("Semantics collectAndPartialResolvecontainer is not implemented in MethodCall.");
+		boolean result = true;
+		if (this.target != null) {
+			result = this.target.collectAndPartialResolve(_scope);
+		}
+		for (AccessibleExpression arg : this.arguments) {
+			result &= arg.collectAndPartialResolve(_scope);
+		}
+		return result;
 	}
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		throw new SemanticsUndefinedException("Semantics completeResolve is not implemented in MethodCall.");
+		boolean result = true;
+		if (this.target != null) {
+			result &= this.target.completeResolve(_scope);
+			if (!(this.target.getType() instanceof ClassType classType)) {
+				System.err.println("Target is not a class type.");
+				return false;
+			}
+			ClassDeclaration classDecl = classType.getDeclaration();
+			this.method = classDecl.getMethod(this.name);
+			if (this.method == null) {
+				System.err.println("Method " + this.name + " not found in class " + classType.getName());
+				return false;
+			}
+		} else {
+			if (_scope.knows(this.name) && _scope.get(this.name) instanceof MethodDeclaration md) {
+				this.method = md;
+			} else {
+				System.err.println("Method " +this.name + " not found in current scope.");
+				return false;
+			}
+		}
+		for (AccessibleExpression arg : this.arguments) {
+			result &= arg.completeResolve(_scope);
+		}
+		return result;
 	}
 
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException("Semantics checkType is not implemented in MethodCall.");
+		List<ParameterDeclaration> parameters = this.method.getParameters();
+		if (parameters.size() != this.arguments.size()) {
+			System.err.println("Method call argument count mismatch.");
+			return false;
+		}
+		boolean result = true;
+		for (int i = 0; i < arguments.size(); i++) {
+			if (!arguments.get(i).getType().compatibleWith(parameters.get(i).getType())) {
+				System.err.println("Argument " + (i + 1) + " type mismatch.");
+				result = false;
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException("Semantics allocateMemory is not implemented in MethodCall.");
+		return 0;
 	}
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode is not implemented in MethodCall.");
+		Fragment code = _factory.createFragment();
+		for (AccessibleExpression arg : this.arguments) {
+			code.append(arg.getCode(_factory));
+		}
+		code.add(_factory.createCall(this.method.getName(), Register.LB));
+		return code;
 	}
 	
 	@Override
