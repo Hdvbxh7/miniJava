@@ -68,7 +68,8 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		return (assignable.completeResolve(_scope) && value.completeResolve(_scope));
+		boolean ok = assignable.completeResolve(_scope) && value.completeResolve(_scope);
+		return ok;
 	}
 
 	/* (non-Javadoc)
@@ -134,6 +135,7 @@ public class Assignment implements Instruction, Expression {
 		Fragment fragment = _factory.createFragment();
 		fragment.append(value.getCode(_factory));
 		fragment.addComment(this.toString());
+		System.out.println(assignable.getClass());
 		fragment.append(assignable.getCode(_factory));
 		return fragment;
 	}

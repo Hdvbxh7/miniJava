@@ -11,8 +11,12 @@ import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
+import fr.n7.stl.minijava.ast.type.ClassType;
 import fr.n7.stl.util.Logger;
 import fr.n7.stl.minic.ast.scope.SymbolTable;
+import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.tam.ast.Register;
 
 public class ConstructorDeclaration extends ClassElement {
 	
@@ -27,6 +31,8 @@ public class ConstructorDeclaration extends ClassElement {
 	protected ClassDeclaration classDec;
 
 	protected HierarchicalScope<Declaration> localScope;
+
+	public String funName;
 
 	public ConstructorDeclaration(String _name, List<ParameterDeclaration> _parameters, Block _body) {
 		super( _name);
@@ -54,7 +60,8 @@ public class ConstructorDeclaration extends ClassElement {
 				ok = ok && false;
 			}
 		}
-		return ok && this.body.collectAndPartialResolve(localScope);
+		ok = ok && this.body.collectAndPartialResolve(localScope);
+		return ok;
 	};
 
 	@Override
@@ -63,6 +70,17 @@ public class ConstructorDeclaration extends ClassElement {
 		return body.completeResolve(this.localScope);
 
 	};
+
+	@Override
+	public int allocateMemory(int _offset) {
+		int paramSizes = -1;
+		for(ParameterDeclaration p : parameters){
+			p.setOffset(paramSizes - p.getType().length());
+			paramSizes = paramSizes - p.getType().length();
+		}
+		body.allocateMemory(Register.LB, 3);
+		return 0;
+	}
 
 	@Override
 	public boolean checkType(){
@@ -93,6 +111,28 @@ public class ConstructorDeclaration extends ClassElement {
 
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException("Semantics getType is not implemented in constructor.");
+		return classDec.getType();
+	}
+
+	@Override
+	public Fragment getCode(TAMFactory _factory) {
+		Fragment fragment = _factory.createFragment();
+		int i = _factory.createLabelNumber();
+		this.funName = "CONSTRUCTOR"+this.name+i;
+		fragment.add(_factory.createJump("SKIP"+funName));
+		fragment.addSuffix(funName);
+		fragment.append(body.getCode(_factory));
+		fragment.add(_factory.createLoad(Register.LB,-1,1));
+		fragment.add(_factory.createReturn(1,this.paramSize()));
+		fragment.addSuffix("SKIP"+funName);
+		return fragment;
+	}
+
+	private int paramSize(){
+		int i =0;
+		for(ParameterDeclaration pDecl:parameters){
+			i += pDecl.getType().length();
+		}
+		return i;
 	}
 }

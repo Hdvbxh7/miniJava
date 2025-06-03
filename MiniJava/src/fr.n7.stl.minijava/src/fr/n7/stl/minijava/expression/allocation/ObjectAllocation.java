@@ -16,6 +16,7 @@ import fr.n7.stl.minijava.ast.type.declaration.ConstructorDeclaration;
 import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.util.Logger;
 
@@ -38,7 +39,8 @@ public class ObjectAllocation  implements AccessibleExpression, AssignableExpres
 			return true;
 		} else if(_scope.knows(name)){
 			boolean valider = false;
-			if(declaration instanceof ClassDeclaration classDeclaration){
+			Declaration decl = _scope.get(name);
+			if(decl instanceof ClassDeclaration classDeclaration){
 				for(ConstructorDeclaration cd: classDeclaration.getConstructors()){
 					List<ParameterDeclaration> paramList = cd.getParameters();
 					if(arguments.size()==paramList.size()){
@@ -57,7 +59,6 @@ public class ObjectAllocation  implements AccessibleExpression, AssignableExpres
 					}
 				}
 			}
-			System.out.println(valider);
 			return valider;
 		}
 		return false;
@@ -76,10 +77,24 @@ public class ObjectAllocation  implements AccessibleExpression, AssignableExpres
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment fragment = _factory.createFragment();
-		if(declaration.getType() instanceof ClassType cType){
-			fragment.add(_factory.createLoadL(cType.lengthAttr()));
+		if(!arguments.isEmpty()){
+			for(AccessibleExpression e: arguments){
+				fragment.append(e.getCode(_factory));
+			}
+			if(declaration.getType() instanceof ClassType cType){
+				fragment.add(_factory.createLoadL(cType.lengthAttr()));
+			}
+			fragment.add(Library.MAlloc);
+			if(declaration instanceof ConstructorDeclaration cdec){
+				System.out.println(cdec.funName);
+				fragment.add(_factory.createCall(cdec.funName,Register.LB));
+			}
+		} else {
+			if(declaration.getType() instanceof ClassType cType){
+				fragment.add(_factory.createLoadL(cType.lengthAttr()));
+			}
+			fragment.add(Library.MAlloc);
 		}
-		fragment.add(Library.MAlloc);
 		return fragment;
 	}
 	

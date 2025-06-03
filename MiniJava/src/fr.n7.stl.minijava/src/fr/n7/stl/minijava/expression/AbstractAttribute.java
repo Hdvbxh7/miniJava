@@ -28,7 +28,7 @@ public abstract class AbstractAttribute <ObjectKind extends Expression> implemen
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok =true;
 		ok = ok && this.object.collectAndPartialResolve(_scope);
-		ok = ok && this.object.getType().completeResolve(_scope);	
+		ok = ok && this.object.getType().completeResolve(_scope);
 		if(this.object.getType() instanceof ClassType cobject){
 			if((_scope.knows(cobject.getName()) && (_scope.get(cobject.getName()) instanceof ClassDeclaration cdec))){
 				attribute = cdec.getAttribute(name);
@@ -40,9 +40,11 @@ public abstract class AbstractAttribute <ObjectKind extends Expression> implemen
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		return object.completeResolve(_scope) && this.object.getType().completeResolve(_scope);
+		boolean ok = object.completeResolve(_scope) ;	
+		ok = ok && this.object.getType().completeResolve(_scope);
+		return ok;
 	}
-
+	
 	@Override
 	public Type getType() {
 		return attribute.getType();

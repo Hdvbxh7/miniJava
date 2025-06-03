@@ -11,6 +11,8 @@ import fr.n7.stl.minijava.ast.type.declaration.ClassDeclaration;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.util.Logger;
 
+
+
 public abstract class AbstractThis <ObjectKind extends Expression> implements Expression {
 
 	protected ClassDeclaration object;
@@ -39,7 +41,7 @@ public abstract class AbstractThis <ObjectKind extends Expression> implements Ex
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		return false;
+		return true;
 	}
 
 	@Override

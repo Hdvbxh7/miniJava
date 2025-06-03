@@ -186,7 +186,7 @@ public class FunctionDeclaration implements Instruction, Declaration {
 			p.offset =  paramSizes - p.getType().length();
 			paramSizes = paramSizes - p.getType().length();
 		}
-		body.allocateMemory(Register.LB, _offset+3);
+		body.allocateMemory(Register.LB, 3);
 		return 0;
 	}
 

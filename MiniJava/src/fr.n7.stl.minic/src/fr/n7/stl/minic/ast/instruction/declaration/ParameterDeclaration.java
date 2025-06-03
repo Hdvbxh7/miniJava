@@ -28,6 +28,10 @@ public class ParameterDeclaration implements Declaration {
 	 */
 	protected int offset;
 
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+
 	/**
 	 * Builds an AST node for a formal parameter declaration
 	 * @param _name : Name of the formal parameter
@@ -70,5 +74,6 @@ public class ParameterDeclaration implements Declaration {
 	public int getOffset() {
 		return this.offset;
 	}
+	
 
 }

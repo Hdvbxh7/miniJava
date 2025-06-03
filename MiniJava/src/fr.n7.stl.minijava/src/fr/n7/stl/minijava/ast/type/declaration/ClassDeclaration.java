@@ -27,6 +27,8 @@ import fr.n7.stl.tam.ast.TAMFactory;
 public class ClassDeclaration implements Instruction, Declaration {
 	
 	protected List<ClassElement> elements;
+
+	protected List<ClassElement> elementsandHerited;
 	
 	public List<ClassElement> getElements() {
 		return elements;
@@ -52,6 +54,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 		this.name = _name;
 		this.ancestor = _ancestor;
 		this.elements = _elements;
+		this.elementsandHerited = new ArrayList<>();
 	}
 	
 	/**
@@ -59,6 +62,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 	 */
 	public ClassDeclaration(boolean _concrete, String _name, List<ClassElement> _elements) {
 		this( _concrete, _name, null, _elements);
+		this.elementsandHerited = new ArrayList<>();
 	}
 
 	
@@ -75,6 +79,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
+		this.elementsandHerited.addAll(elements);
 		boolean ok = true;
 		type = new ClassType(name);
 		if (_scope.accepts(this)) {
@@ -119,11 +124,11 @@ public class ClassDeclaration implements Instruction, Declaration {
 				for(ClassElement ceAn: ancestorclass.getElements()){
 					int index = alreadyIn(ceAn);
 					if(index==-1){
-						elements.add(ancestorclass.getElements().indexOf(ceAn),ceAn);
+						elementsandHerited.add(ancestorclass.getElements().indexOf(ceAn),ceAn);
 					} else {
-						ClassElement classElement = elements.get(index);
-						elements.remove(index);
-						elements.add(ancestorclass.getElements().indexOf(ceAn),classElement);
+						ClassElement classElement = elementsandHerited.get(index);
+						elementsandHerited.remove(index);
+						elementsandHerited.add(ancestorclass.getElements().indexOf(ceAn),classElement);
 					}
 				}
 			}
@@ -145,10 +150,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 	public int allocateMemory(Register _register, int _offset) {
 		int off = 0;
 		for (ClassElement classElement : elements) {
-			if(classElement instanceof AttributeDeclaration attributed){
-				attributed.offset = off;
-				off += attributed.getType().length(); 
-			}
+				off += classElement.allocateMemory(off);
 		}
 		return 0;
 	}
@@ -156,6 +158,13 @@ public class ClassDeclaration implements Instruction, Declaration {
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment fragment = _factory.createFragment();
+		for (ClassElement classElement : elements) {
+			fragment.append(classElement.getCode(_factory));
+		}
+		if((elements.size()-attributenum())==0){
+			fragment.add(_factory.createPush(0));
+		}
+		fragment.addComment("Classe : " + this.name);
 		return fragment;
 	}
 
@@ -205,26 +214,14 @@ public class ClassDeclaration implements Instruction, Declaration {
 	}
 
 	public AttributeDeclaration getAttribute(String nameatt){
-		for(ClassElement ceIn: elements){
+		for(ClassElement ceIn: elementsandHerited){
 			if(ceIn instanceof AttributeDeclaration eAttributeIn){
 				if(eAttributeIn.getName().equals(nameatt)){
 					return eAttributeIn;
 				}
 			}
 		}
-		if(ancestorClass!=null && ancestorClass.getAttribute(nameatt)!=null){
-			Logger.error("attribut "+nameatt+" non accessible dans la classe "+name);
-		}
 		Logger.error("attribut "+nameatt+" non existant dans la classe "+name);
-		return null;
-	}
-	
-	public MethodDeclaration getMethod(String name){
-		for(ClassElement element: this.elements){
-			if(element instanceof MethodDeclaration method && method.getName().equals(name)){
-				return method;
-			}
-		}
 		return null;
 	}
 	
@@ -244,6 +241,25 @@ public class ClassDeclaration implements Instruction, Declaration {
 		}
 		image += "}\n";
 		return image;
+	}
+
+	private int attributenum(){
+		int i= 0;
+		for(ClassElement ceIn: elements){
+			if(ceIn instanceof AttributeDeclaration eAttributeIn){
+				i++;
+			}
+		}
+		return i;
+	}
+	
+		public MethodDeclaration getMethod(String name){
+		for(ClassElement element: this.elements){
+			if(element instanceof MethodDeclaration method && method.getName().equals(name)){
+				return method;
+			}
+		}
+		return null;
 	}
 
 }

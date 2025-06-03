@@ -5,6 +5,8 @@ import fr.n7.stl.minijava.ast.type.declaration.ElementKind;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
 import fr.n7.stl.util.Logger;
+import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.TAMFactory;
 
 public abstract class ClassElement  implements Declaration {
 	
@@ -28,8 +30,17 @@ public abstract class ClassElement  implements Declaration {
 		return false;
 	};
 
+
+	public int allocateMemory(int _offset) {
+		return 0;
+	}
+
 	public boolean checkType(){
 		return false;
+	}
+
+	public Fragment getCode(TAMFactory _factory) {
+		return _factory.createFragment();
 	}
 	
 	public ClassElement(String _name) {

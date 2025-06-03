@@ -27,6 +27,13 @@ public class AttributeDeclaration extends ClassElement {
 	};
 
 	@Override
+	public int allocateMemory(int _offset) {
+		this.offset = _offset;
+		return type.length();
+	}
+
+
+	@Override
 	public boolean completeResolve(ClassSymbolTable _scope){
 		return true;
 	};

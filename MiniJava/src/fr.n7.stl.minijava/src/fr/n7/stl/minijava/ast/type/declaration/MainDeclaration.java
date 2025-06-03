@@ -43,7 +43,8 @@ public class MainDeclaration implements Instruction {
 				Logger.error("Le parser est cringe dans main declaration");
 			}
 		}
-		return ok && main.collectAndPartialResolve(_scope);
+		ok = ok &&  main.collectAndPartialResolve(_scope);
+		return ok ;
 	}
 
 	@Override
@@ -77,7 +78,8 @@ public class MainDeclaration implements Instruction {
 				Logger.error("Le parser est cringe dans main declaration");
 			}
 		}
-		return ok && main.completeResolve(_scope);
+		ok = ok && main.completeResolve(_scope);
+		return ok;
 	}
 
 	@Override

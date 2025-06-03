@@ -27,6 +27,11 @@ public class AttributeAssignment extends AbstractAttribute<AssignableExpression>
 			fragment.add(_factory.createLoadL(attribute.offset));
 			fragment.add(Library.IAdd);
 			fragment.add(_factory.createStoreI(attribute.getType().length()));
+		} else {
+			fragment.append(object.getCode(_factory));
+			fragment.add(_factory.createLoadL(attribute.offset));
+			fragment.add(Library.IAdd);
+			fragment.add(_factory.createStoreI(attribute.getType().length()));
 		}
 		return fragment;
 	}
