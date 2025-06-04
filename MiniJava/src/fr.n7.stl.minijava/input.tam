@@ -12,7 +12,18 @@ LOAD (1) -1[LB]
 RETURN (1) 1
 SKIPCONSTRUCTORA1
 ;Classe : B
-PUSH 0
+JUMP SKIPCONSTRUCTORB2
+CONSTRUCTORB2
+;this.v = b;
+
+LOAD (1) -2[LB]
+LOAD (1) -1[LB]
+LOADL 0
+SUBR IAdd
+STOREI (1)
+LOAD (1) -1[LB]
+RETURN (1) 1
+SKIPCONSTRUCTORB2
 JUMP SKIPFUNCsucc
 FUNCsucc
 ;(i + 1)
@@ -22,8 +33,10 @@ SUBR IAdd
 RETURN (1) 1
 SKIPFUNCsucc
 PUSH 1
+LOADL 5
 LOADL 2
 SUBR MAlloc
+CALL (LB) CONSTRUCTORB2
 STORE (1) 0[SB]
 ; a1  = new B( );
 
@@ -42,13 +55,15 @@ LOADL 0
 SUBR IAdd
 STOREI (1)
 PUSH 1
-;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@18e8568
+;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@629f0666
 LOAD (1) 0[SB]
 LOADL 0
 SUBR IAdd
 LOADI (1)
 STORE (1) 2[SB]
-;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@33e5ccce
+LOADL 1
+CALL (LB) setV
+;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@1bc6a36e
 ;print b;
 
 LOAD (1) 2[SB]

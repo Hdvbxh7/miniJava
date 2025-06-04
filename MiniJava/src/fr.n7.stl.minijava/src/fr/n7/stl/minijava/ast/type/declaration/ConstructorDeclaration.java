@@ -68,7 +68,6 @@ public class ConstructorDeclaration extends ClassElement {
 	public boolean completeResolve(ClassSymbolTable _scope){
 		this.classDec = _scope.getClassD();
 		return body.completeResolve(this.localScope);
-
 	};
 
 	@Override
@@ -111,7 +110,12 @@ public class ConstructorDeclaration extends ClassElement {
 
 	@Override
 	public Type getType() {
-		return classDec.getType();
+		if(classDec!=null){
+			return classDec.getType();
+		} else{
+			return null;
+		}
+
 	}
 
 	@Override

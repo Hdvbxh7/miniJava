@@ -114,9 +114,6 @@ public class ClassDeclaration implements Instruction, Declaration {
 
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		for (ClassElement element : this.elements) {
-			element.completeResolve(classScope);
-		}
 		if (this.ancestor != null && _scope.knows(this.ancestor)) {
 			Declaration ancestor = _scope.get(this.ancestor);
 			if(ancestor instanceof ClassDeclaration ancestorclass){
@@ -132,6 +129,9 @@ public class ClassDeclaration implements Instruction, Declaration {
 					}
 				}
 			}
+		}
+		for (ClassElement element : this.elements) {
+			element.completeResolve(classScope);
 		}
 		return this.type.completeResolve(_scope);
 	}
@@ -254,7 +254,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 	}
 	
 		public MethodDeclaration getMethod(String name){
-		for(ClassElement element: this.elements){
+		for(ClassElement element: this.elementsandHerited){
 			if(element instanceof MethodDeclaration method && method.getName().equals(name)){
 				return method;
 			}
