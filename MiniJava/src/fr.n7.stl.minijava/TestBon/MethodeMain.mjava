@@ -1,0 +1,23 @@
+class A {
+	public int v;
+	
+	public A(int _v) {
+		this.v = _v;
+	}
+	
+}
+
+public class Main {
+
+
+	static int succ(int i) {
+		return i + 1;
+	}
+
+	public static void main(String[] args) {
+		A a2 = new A( succ(5) );
+        print a2.v;
+
+	}
+}
+		
