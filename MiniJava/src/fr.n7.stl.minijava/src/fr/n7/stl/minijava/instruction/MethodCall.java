@@ -122,7 +122,7 @@ public class MethodCall implements Instruction {
 		for (AccessibleExpression arg : this.arguments) {
 			code.append(arg.getCode(_factory));
 		}
-		code.add(_factory.createCall(this.method.getLabel(), Register.LB));
+		code.add(_factory.createCall(this.method.funName, Register.LB));
 		return code;
 	}
 	

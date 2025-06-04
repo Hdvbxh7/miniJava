@@ -9,15 +9,27 @@ import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
+import fr.n7.stl.minic.ast.scope.SymbolTable;
+import fr.n7.stl.minic.ast.scope.Declaration;
+import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.util.Logger;
+import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Register;
+import fr.n7.stl.tam.ast.TAMFactory;
 
 public class MethodDeclaration  extends ClassElement {
 	
 	protected boolean concrete;
 	
 	protected List<ParameterDeclaration> parameters;
+
+	protected HierarchicalScope<Declaration> localScope;
+
+	protected FunctionDeclaration func;
 	
 	protected Block body;
+
+	public String funName;
 	
 	protected Type type;
 	
@@ -39,23 +51,28 @@ public class MethodDeclaration  extends ClassElement {
 
 	@Override
 	public boolean collectAndPartialResolve(ClassSymbolTable _scope){
-		if (_scope.accepts(this)) {
-			_scope.register(this);
-			return true;
-		} else {
-			Logger.error("Method " + this.name + " is already defined in class " + _scope.getClassD().getName());
-		}
-		return false;
+		this.func = new FunctionDeclaration(name,type,parameters,body);
+		return this.func.collectAndPartialResolve(_scope);
 	};
 
 	@Override
 	public boolean completeResolve(ClassSymbolTable _scope){
-		return true;
+		return this.func.completeResolve(_scope);
 	};
 
 	@Override
 	public boolean checkType(){
-		return true;
+		return this.func.checkType();
+	}
+	@Override
+	public int allocateMemory(int _offset) {
+		int paramSizes = -1;
+		for(ParameterDeclaration p : parameters){
+			p.setOffset(paramSizes - p.getType().length());
+			paramSizes = paramSizes - p.getType().length();
+		}
+		body.allocateMemory(Register.LB,3);
+		return 0;
 	}
 	
 	@Override
@@ -83,8 +100,16 @@ public class MethodDeclaration  extends ClassElement {
 		return image;
 	}
 
-	public String getLabel() {
-		return "codes_" + this.name;
+	@Override
+	public Fragment getCode(TAMFactory _factory) {
+		Fragment fragment = _factory.createFragment();
+		int i = _factory.createLabelNumber();
+		this.funName = "Method"+this.name+i;
+		fragment.add(_factory.createJump("SKIP"+this.funName));
+		fragment.addSuffix(this.funName);
+		fragment.append(body.getCode(_factory));
+		fragment.addSuffix("SKIP"+this.funName);
+		return fragment;
 	}
 
 	@Override

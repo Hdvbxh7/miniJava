@@ -84,7 +84,7 @@ public class ConstructorDeclaration extends ClassElement {
 	@Override
 	public boolean checkType(){
 		if(classDec.getName().equals(this.name)){
-			return true;
+			return body.checkType();
 		}
 		Logger.error("Le constructeur n'est pas du bon type");
 		return false;

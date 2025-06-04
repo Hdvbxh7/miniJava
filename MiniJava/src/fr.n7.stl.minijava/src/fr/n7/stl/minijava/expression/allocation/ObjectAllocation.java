@@ -59,7 +59,11 @@ public class ObjectAllocation  implements AccessibleExpression, AssignableExpres
 					}
 				}
 			}
-			return valider;
+			if(valider){
+				return true;
+			} else {
+				Logger.error("auncun constructeur défini utiliser le constructeur par défault");
+			}
 		}
 		return false;
 	}
@@ -71,7 +75,11 @@ public class ObjectAllocation  implements AccessibleExpression, AssignableExpres
 
 	@Override
 	public Type getType() {
-		return declaration.getType();
+		if(declaration!=null){
+			return declaration.getType();
+		} else {
+			return null;
+		}
 	}
 
 	@Override

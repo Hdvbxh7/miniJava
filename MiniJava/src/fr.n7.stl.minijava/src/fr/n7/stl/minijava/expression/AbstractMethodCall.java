@@ -95,8 +95,11 @@ public abstract class AbstractMethodCall <ObjectKind extends Expression> impleme
 
 	@Override
 	public Type getType() {
-
-		return this.declaration.getType();
+		if(this.declaration!=null){
+			return this.declaration.getType();
+		} else{
+			return null;
+		}
 		
 	}
 	
