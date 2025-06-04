@@ -116,10 +116,13 @@ public class MethodCall implements Instruction {
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment code = _factory.createFragment();
+		if (this.target != null) {
+			code.append(this.target.getCode(_factory));
+		}
 		for (AccessibleExpression arg : this.arguments) {
 			code.append(arg.getCode(_factory));
 		}
-		code.add(_factory.createCall(this.method.getName(), Register.LB));
+		code.add(_factory.createCall(this.method.getLabel(), Register.LB));
 		return code;
 	}
 	
