@@ -7,7 +7,9 @@ import fr.n7.stl.util.Logger;
 
 import fr.n7.stl.minic.ast.expression.Expression;
 import fr.n7.stl.minic.ast.expression.assignable.AssignableExpression;
+import fr.n7.stl.minic.ast.expression.assignable.VariableAssignment;
 import fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration;
+import fr.n7.stl.minic.ast.instruction.declaration.VariableDeclaration;
 import fr.n7.stl.minic.ast.scope.Declaration;
 import fr.n7.stl.minic.ast.scope.HierarchicalScope;
 import fr.n7.stl.minic.ast.type.ArrayType;
@@ -54,7 +56,14 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		return (assignable.collectAndPartialResolve(_scope) && value.collectAndPartialResolve(_scope));
+		boolean ok = (assignable.collectAndPartialResolve(_scope) && value.collectAndPartialResolve(_scope));
+		if(this.assignable instanceof VariableAssignment vassignable){
+			Declaration dec = vassignable.getDeclaration();
+			if(dec instanceof VariableDeclaration dassignable){
+				dassignable.setType(value.getType());
+			}
+		}
+		return ok;
 
 	}
 	
@@ -69,6 +78,12 @@ public class Assignment implements Instruction, Expression {
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok = assignable.completeResolve(_scope) && value.completeResolve(_scope);
+		if(this.assignable instanceof VariableAssignment vassignable){
+			Declaration dec = vassignable.getDeclaration();
+			if(dec instanceof VariableDeclaration dassignable){
+				dassignable.setType(value.getType());
+			}
+		}
 		return ok;
 	}
 
@@ -85,33 +100,41 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean checkType() {
-		Type typeOfValue = assignable.getType();
-		if(typeOfValue instanceof ArrayType arr){
-			typeOfValue = arr.getType();
-			if(typeOfValue.equalsTo(value.getType())){
+		Type typeOfAssign=null;
+		if(this.assignable instanceof VariableAssignment vassignable){
+			Declaration dec = vassignable.getDeclaration();
+			if(dec instanceof VariableDeclaration dassignable){
+				typeOfAssign = dassignable.getOriginetype();
+			}
+		} else {
+			typeOfAssign = assignable.getType();
+		}
+		if(typeOfAssign instanceof ArrayType arr){
+			typeOfAssign = arr.getType();
+			if(typeOfAssign.equalsTo(value.getType())){
 				return true;
 			} else {
 				Logger.error("Erreur de typage dans l'assignation du tableau :" + this.toString());
 				return false;
 			}
-		} else if(typeOfValue instanceof PointerType ptr){
-			typeOfValue = ptr.getPointedType();
-			if(typeOfValue.equalsTo(value.getType())){
+		} else if(typeOfAssign instanceof PointerType ptr){
+			typeOfAssign = ptr.getPointedType();
+			if(typeOfAssign.equalsTo(value.getType())){
 				return true;
 			} else {
 				Logger.error("Erreur de typage dans l'assignation du pointeur :" + this.toString());
 				return false;
 			}
-		} else if(typeOfValue instanceof NamedType nt){
-			typeOfValue = nt.getType();
-			if(typeOfValue.equalsTo(value.getType())){
+		} else if(typeOfAssign instanceof NamedType nt){
+			typeOfAssign = nt.getType();
+			if(typeOfAssign.equalsTo(value.getType())){
 				return true;
 			} else {
 				Logger.error("Erreur de typage dans l'assignation du pointeur :" + this.toString());
 				return false;
 			}
 		} 
-		if(value.getType().compatibleWith(typeOfValue)){
+		if(value.getType().compatibleWith(typeOfAssign)){
 			return true;
 		}else{
 			Logger.error("Erreur de typage dans l'assignation :" + this.toString());
@@ -135,7 +158,6 @@ public class Assignment implements Instruction, Expression {
 		Fragment fragment = _factory.createFragment();
 		fragment.append(value.getCode(_factory));
 		fragment.addComment(this.toString());
-		System.out.println(assignable.getClass());
 		fragment.append(assignable.getCode(_factory));
 		return fragment;
 	}

@@ -33,7 +33,16 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 * AST node for the type of the declared variable.
 	 */
 	protected Type type;
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	protected Type Originetype;
 	
+	public Type getOriginetype() {
+		return Originetype;
+	}
+
 	/**
 	 * AST node for the initial value of the declared variable.
 	 */
@@ -59,6 +68,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public VariableDeclaration(String _name, Type _type, Expression _value) {
 		this.name = _name;
 		this.type = _type;
+		this.Originetype = _type;
 		this.value = _value;
 	}
 
@@ -67,7 +77,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public String toString() {
-		return this.type + " " + this.name + " = " + this.value + ";\n";
+		return this.Originetype + " " + this.name + " = " + this.value + ";\n";
 	}
 
 	/**
@@ -109,7 +119,11 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		if(_scope.accepts(this)) {
 			_scope.register(this);
-			return this.value.collectAndPartialResolve(_scope);
+			boolean ok = this.value.collectAndPartialResolve(_scope);
+			if(this.value.getType()!=null){
+				this.type = this.value.getType();
+			}
+			return ok;
 		} else {
 			Logger.warning("Variable" + this.name + "Is already defined");
 			return false;
@@ -121,7 +135,9 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope, FunctionDeclaration _container) {
 		if(_scope.accepts(this)) {
 			_scope.register(this);
-			return this.value.collectAndPartialResolve(_scope);
+			boolean ok = this.value.collectAndPartialResolve(_scope);
+			this.type = this.value.getType();
+			return ok;
 		} else {
 			Logger.warning("Variable" + this.name + "Is already defined");
 			return false;
@@ -133,7 +149,9 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		return (this.value.completeResolve(_scope) && this.type.completeResolve(_scope));
+		boolean ok = (this.value.completeResolve(_scope) && this.type.completeResolve(_scope));
+		this.type = this.value.getType();
+		return ok;
 
 	}
 
@@ -142,7 +160,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		Type typeOfValue = namedFilter(this.type);
+		Type typeOfValue = namedFilter(this.Originetype);
 		return value.getType().compatibleWith(typeOfValue);
 	}
 
