@@ -6,7 +6,6 @@ import java.util.List;
 import fr.n7.stl.minic.ast.Block;
 import fr.n7.stl.minic.ast.instruction.declaration.FunctionDeclaration;
 import fr.n7.stl.minic.ast.instruction.declaration.ParameterDeclaration;
-import fr.n7.stl.minic.ast.type.Type;
 import fr.n7.stl.minijava.ast.scope.ClassSymbolTable;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.minic.ast.scope.SymbolTable;
@@ -16,6 +15,7 @@ import fr.n7.stl.util.Logger;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.minic.ast.type.*;
 
 public class MethodDeclaration  extends ClassElement {
 	
@@ -108,6 +108,9 @@ public class MethodDeclaration  extends ClassElement {
 		fragment.add(_factory.createJump("SKIP"+this.funName));
 		fragment.addSuffix(this.funName);
 		fragment.append(body.getCode(_factory));
+		if(this.type.compatibleWith(AtomicType.VoidType)){
+			fragment.add(_factory.createReturn(0,this.paramSize()+1));
+		}
 		fragment.addSuffix("SKIP"+this.funName);
 		return fragment;
 	}
@@ -115,5 +118,13 @@ public class MethodDeclaration  extends ClassElement {
 	@Override
 	public Type getType() {
 		return this.type;
+	}
+
+	private int paramSize(){
+		int i =0;
+		for(ParameterDeclaration pDecl:parameters){
+			i += pDecl.getType().length();
+		}
+		return i;
 	}
 }

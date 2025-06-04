@@ -28,7 +28,15 @@ public class MethodCallAccess extends AbstractMethodCall<AccessibleExpression> i
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode is not implemented in MethodCallAccess.");
+		Fragment code = _factory.createFragment();
+		if (this.target != null) {
+			code.append(this.target.getCode(_factory));
+		}
+		for (AccessibleExpression arg : this.arguments) {
+			code.append(arg.getCode(_factory));
+		}
+		code.add(_factory.createCall(this.declaration.funName, Register.LB));
+		return code;
 	}
 	
 }
