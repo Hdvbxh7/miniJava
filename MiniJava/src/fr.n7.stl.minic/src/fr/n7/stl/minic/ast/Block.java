@@ -88,7 +88,6 @@ public class Block {
 		for (Instruction i : this.instructions) {
 			ok = ok && i.collectAndPartialResolve(this.localScope,_container);
 		}
-
 		return ok;
 	}
 	

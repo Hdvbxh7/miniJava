@@ -20,7 +20,11 @@ LOAD (1) -1[LB]
 LOADL 0
 SUBR IAdd
 STOREI (1)
-RETURN (0) 2
+LOAD (1) -1[LB]
+LOADL 0
+SUBR IAdd
+LOADI (1)
+RETURN (1) 1
 SKIPMethodsetV2
 ;Classe : B
 PUSH 0
@@ -53,7 +57,7 @@ LOADL 0
 SUBR IAdd
 STOREI (1)
 PUSH 1
-;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@1ff8b8f
+;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@22a71081
 LOAD (1) 0[SB]
 LOADL 0
 SUBR IAdd
@@ -62,15 +66,17 @@ STORE (1) 2[SB]
 PUSH 1
 LOADL 1
 STORE (1) 3[SB]
+PUSH 1
 LOADL 1
-;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@387c703b
+;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@3930015a
 LOAD (1) 0[SB]
 CALL (LB) MethodsetV2
-;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@224aed64
+STORE (1) 4[SB]
+;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@629f0666
 ;print b;
 
 LOAD (1) 2[SB]
 SUBR IOut
-POP (0) 4
+POP (0) 5
 HALT
 

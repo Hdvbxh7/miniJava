@@ -116,7 +116,6 @@ public class MethodCall implements Instruction {
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment code = _factory.createFragment();
-		System.out.println(target);
 		for (AccessibleExpression arg : this.arguments) {
 			code.append(arg.getCode(_factory));
 		}
