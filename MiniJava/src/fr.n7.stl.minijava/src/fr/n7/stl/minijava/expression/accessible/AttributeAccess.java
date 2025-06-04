@@ -22,7 +22,7 @@ public class AttributeAccess extends AbstractAttribute<AccessibleExpression>  im
 
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
-		boolean ok = (this.object.collectAndPartialResolve(_scope) && this.object.getType().completeResolve(_scope));
+		boolean ok = (this.object.collectAndPartialResolve(_scope));
 		return ok;
 	}
 
@@ -37,12 +37,16 @@ public class AttributeAccess extends AbstractAttribute<AccessibleExpression>  im
 				return true;
 			}
 		}
-		return object.completeResolve(_scope);
+		return object.completeResolve(_scope) && this.object.getType().completeResolve(_scope);
 	}
 
 	@Override
 	public Type getType() {
-		return attribute.getType();
+		if(this.attribute!=null){
+			return this.attribute.getType();
+		} else {
+			return null;
+		}
 	}
 
 	@Override

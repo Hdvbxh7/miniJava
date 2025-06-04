@@ -19,7 +19,7 @@ public class AttributeDeclaration extends ClassElement {
 	public boolean collectAndPartialResolve(ClassSymbolTable _scope){
 		if (_scope.accepts(this)) {
 			_scope.register(this);
-			return type.completeResolve(_scope);
+			return true;
 		} else {
 			Logger.error("Attribute " + this.name + " is already defined in class "+ _scope.getClassD().getName());
 		}
@@ -35,7 +35,7 @@ public class AttributeDeclaration extends ClassElement {
 
 	@Override
 	public boolean completeResolve(ClassSymbolTable _scope){
-		return true;
+		return type.completeResolve(_scope);
 	};
 
 	@Override
