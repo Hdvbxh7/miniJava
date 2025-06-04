@@ -62,9 +62,9 @@ STORE (1) 2[SB]
 PUSH 1
 LOADL 1
 STORE (1) 3[SB]
+LOADL 1
 ;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@387c703b
 LOAD (1) 0[SB]
-LOADL 1
 CALL (LB) MethodsetV2
 ;fr.n7.stl.minic.ast.expression.accessible.VariableAccess@224aed64
 ;print b;

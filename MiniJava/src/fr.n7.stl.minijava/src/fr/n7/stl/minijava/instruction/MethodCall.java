@@ -117,11 +117,11 @@ public class MethodCall implements Instruction {
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment code = _factory.createFragment();
 		System.out.println(target);
-		if (this.target != null) {
-			code.append(this.target.getCode(_factory));
-		}
 		for (AccessibleExpression arg : this.arguments) {
 			code.append(arg.getCode(_factory));
+		}
+		if (this.target != null) {
+			code.append(this.target.getCode(_factory));
 		}
 		code.add(_factory.createCall(this.method.funName, Register.LB));
 		return code;
