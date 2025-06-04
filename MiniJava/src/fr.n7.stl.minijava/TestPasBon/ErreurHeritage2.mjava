@@ -15,9 +15,9 @@ class B{
 public class Main {
 
 	public static void main(String[] args) {
-        A a1 = new B();
-        a1.v = 8;
-        print a1.v;
+        A[] a1 = new A[5];
+		A a2 = new A();
+		a1[0] = a2;
         
 	}
 }

@@ -5,6 +5,10 @@ class A {
 	public A(int i) {
 		this.v = i;
 	}
+
+    public int succ(int i) {
+        return i + 1;
+    }
 	
 }
 
@@ -13,7 +17,7 @@ class B extends A{
 	public int d;
 
 	public B(int i) {
-		this.d = i;
+		this.d = this.succ(i);
 	}
 
 }
@@ -24,8 +28,7 @@ public class Main {
 
 	public static void main(String[] args) {
         A a1 = new B(5);
-        a1.v = (a1.d + 1);
-        print a1.v;
+        print a1.d;
         
 	}
 }

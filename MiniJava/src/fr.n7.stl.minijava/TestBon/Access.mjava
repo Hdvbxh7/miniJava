@@ -1,0 +1,28 @@
+class A {
+
+	protected int v;
+	
+}
+
+class B extends A {
+
+    public int d;
+
+    public B(int i, int j) {
+        this.v = i;
+        this.d = j;
+    }
+
+}
+
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+        A a1 = new B(5, 3);
+        print (a1.d);
+        
+	}
+}

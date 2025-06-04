@@ -4,10 +4,8 @@ class A {
 	public A(int _v) {
 		this.v = _v;
 	}
+    
 
-    public void setV(int i) {
-		this.v = i;
-    }
 	
 }
 
@@ -15,9 +13,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		A a1 = new A(5);
-		print a1.v;
-        a1.setV(8);
-		print a1.v;
+
+        a1.v = a1.succ(a1.v);
+
+        print a1.v;
 	}
 }
 		
