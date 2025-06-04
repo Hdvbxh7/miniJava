@@ -83,6 +83,10 @@ public class MethodDeclaration  extends ClassElement {
 		return image;
 	}
 
+	public String getLabel() {
+		return "codes_" + this.name;
+	}
+
 	@Override
 	public Type getType() {
 		return this.type;
