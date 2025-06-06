@@ -35,6 +35,7 @@ public class AttributeDeclaration extends ClassElement {
 
 	@Override
 	public boolean completeResolve(ClassSymbolTable _scope){
+		this.classDeclaration = _scope.getClassD();
 		return type.completeResolve(_scope);
 	};
 

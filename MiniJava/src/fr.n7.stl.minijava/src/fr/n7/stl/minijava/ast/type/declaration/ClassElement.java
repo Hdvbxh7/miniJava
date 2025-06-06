@@ -11,7 +11,13 @@ import fr.n7.stl.tam.ast.TAMFactory;
 public abstract class ClassElement  implements Declaration {
 	
 	protected ElementKind elementKind;
+
+	protected ClassDeclaration classDeclaration;
 	
+	public ClassDeclaration getClassDeclaration() {
+		return classDeclaration;
+	}
+
 	protected AccessRight accessRight;
 	
 	protected String name;

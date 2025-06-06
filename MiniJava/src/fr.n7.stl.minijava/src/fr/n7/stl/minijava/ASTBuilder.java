@@ -641,7 +641,7 @@ public class ASTBuilder extends MiniJavaParserBaseListener {
 
     @Override
     public void exitExpressionConversion(MiniJavaParser.ExpressionConversionContext ctx) {
-    	ctx.uneExpression = new AccessibleConversion(ctx.uneExpression, ctx.leType.unType );
+    	ctx.uneExpression = new AccessibleConversion(ctx.expression().uneExpression, ctx.leType.unType );
     }
 
     @Override

@@ -1,5 +1,4 @@
 class A {
-	public int v;
 	public A(int b){
 		this.v=b;
 	}
@@ -7,12 +6,22 @@ class A {
 		this.v = _v;
 		return this.v;
 	}
+	public int setV(int _v,int _d) {
+		this.v = _v;
+		return this.v;
+	}
+		protected int v;
 	
 }
 
 class B extends A{
 	public int b;
 	public int d;
+
+	public int setV(int _v) {
+		this.v = _v;
+		return this.v;
+	}
 }
 
 public class Main {
@@ -25,10 +34,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		A a1 = new B();
-		a1 = new B();
+		a1 = new A();
 		B b2 = new B();
 		a1.v = 5;
-		int b = a1.b;
+		b2 = (B)a1;
+		int b = b2.b;
 		int e = 1;
 		int g = a1.setV(1);
 		print b;

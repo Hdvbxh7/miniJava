@@ -57,12 +57,6 @@ public class Assignment implements Instruction, Expression {
 	@Override
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok = (assignable.collectAndPartialResolve(_scope) && value.collectAndPartialResolve(_scope));
-		if(this.assignable instanceof VariableAssignment vassignable){
-			Declaration dec = vassignable.getDeclaration();
-			if(dec instanceof VariableDeclaration dassignable){
-				dassignable.setType(value.getType());
-			}
-		}
 		return ok;
 
 	}
@@ -78,12 +72,6 @@ public class Assignment implements Instruction, Expression {
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
 		boolean ok = assignable.completeResolve(_scope) && value.completeResolve(_scope);
-		if(this.assignable instanceof VariableAssignment vassignable){
-			Declaration dec = vassignable.getDeclaration();
-			if(dec instanceof VariableDeclaration dassignable){
-				dassignable.setType(value.getType());
-			}
-		}
 		return ok;
 	}
 
@@ -100,15 +88,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean checkType() {
-		Type typeOfAssign=null;
-		if(this.assignable instanceof VariableAssignment vassignable){
-			Declaration dec = vassignable.getDeclaration();
-			if(dec instanceof VariableDeclaration dassignable){
-				typeOfAssign = dassignable.getOriginetype();
-			}
-		} else {
-			typeOfAssign = assignable.getType();
-		}
+		Type typeOfAssign= assignable.getType();
 		if(typeOfAssign instanceof ArrayType arr){
 			typeOfAssign = arr.getType();
 			if(typeOfAssign.equalsTo(value.getType())){

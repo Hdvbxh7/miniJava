@@ -110,4 +110,14 @@ public class SymbolTable implements HierarchicalScope<Declaration> {
 		return _local;
 	}
 
+	@Override
+	public Declaration getThisClass() {
+		if (this.context != null && this.context instanceof HierarchicalScope<?> scope) {
+			return scope.getThisClass();
+		} else {
+			return null;
+		}
+	}
+
+
 }

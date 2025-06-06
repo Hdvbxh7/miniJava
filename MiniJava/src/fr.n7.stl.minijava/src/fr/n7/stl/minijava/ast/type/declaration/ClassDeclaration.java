@@ -55,6 +55,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 		this.ancestor = _ancestor;
 		this.elements = _elements;
 		this.elementsandHerited = new ArrayList<>();
+		this.type = new ClassType(name);
 	}
 	
 	/**
@@ -63,6 +64,7 @@ public class ClassDeclaration implements Instruction, Declaration {
 	public ClassDeclaration(boolean _concrete, String _name, List<ClassElement> _elements) {
 		this( _concrete, _name, null, _elements);
 		this.elementsandHerited = new ArrayList<>();
+		this.type = new ClassType(name);
 	}
 
 	
@@ -81,7 +83,6 @@ public class ClassDeclaration implements Instruction, Declaration {
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		this.elementsandHerited.addAll(elements);
 		boolean ok = true;
-		type = new ClassType(name);
 		if (_scope.accepts(this)) {
 			if (this.ancestor == null || _scope.knows(this.ancestor)) {
 				_scope.register(this);
@@ -91,8 +92,15 @@ public class ClassDeclaration implements Instruction, Declaration {
 		}
 
 		classScope = new ClassSymbolTable(this,_scope);
-
+		ArrayList<ClassElement> toDoLater = new ArrayList<>();
 		for (ClassElement element : this.elements) {
+			if(element instanceof AttributeDeclaration){
+				element.collectAndPartialResolve(classScope);
+			} else {
+				toDoLater.add(element);
+			}
+		}
+		for (ClassElement element : toDoLater) {
 			element.collectAndPartialResolve(classScope);
 		}
 		return true;
@@ -130,7 +138,15 @@ public class ClassDeclaration implements Instruction, Declaration {
 				}
 			}
 		}
+		ArrayList<ClassElement> toDoLater = new ArrayList<>();
 		for (ClassElement element : this.elements) {
+			if(element instanceof AttributeDeclaration){
+				element.completeResolve(classScope);
+			} else {
+				toDoLater.add(element);
+			}
+		}
+		for (ClassElement element : toDoLater) {
 			element.completeResolve(classScope);
 		}
 		return this.type.completeResolve(_scope);

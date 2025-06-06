@@ -51,7 +51,7 @@ public class MethodDeclaration  extends ClassElement {
 
 	@Override
 	public boolean collectAndPartialResolve(ClassSymbolTable _scope){
-		this.func = new FunctionDeclaration(name,type,parameters,body);
+		this.func = new FunctionDeclaration(this.name,type,parameters,body);
 		return this.func.collectAndPartialResolve(_scope);
 	};
 

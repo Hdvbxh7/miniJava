@@ -59,7 +59,9 @@ public abstract class AbstractConversion<TargetType> implements Expression {
 	public boolean collectAndPartialResolve(HierarchicalScope<Declaration> _scope) {
 		if(target instanceof Expression expr){
 			return expr.collectAndPartialResolve(_scope);
-		} else {
+		} else if(target instanceof Declaration) {
+			return true;
+		} else{
 			throw new RuntimeException("C'était pas une expression en faîtes : " + this.toString());
 		}
 	}
@@ -69,11 +71,20 @@ public abstract class AbstractConversion<TargetType> implements Expression {
 	 */
 	@Override
 	public boolean completeResolve(HierarchicalScope<Declaration> _scope) {
-		Expression expr = (Expression)target;
-		if (this.type == null) {
-			return _scope.knows(name) && expr.completeResolve(_scope);
-		} else {
-			return type.completeResolve(_scope) && expr.completeResolve(_scope);
+		if(target instanceof Expression expr){
+			if (this.type == null) {
+				return _scope.knows(name) && expr.completeResolve(_scope);
+			} else {
+				return type.completeResolve(_scope) && expr.completeResolve(_scope);
+			}
+		}else if(target instanceof Declaration){
+			if (this.type == null) {
+				return _scope.knows(name);
+			} else {
+				return type.completeResolve(_scope);
+			}
+		} else{
+			return false;
 		}
 		
 	}

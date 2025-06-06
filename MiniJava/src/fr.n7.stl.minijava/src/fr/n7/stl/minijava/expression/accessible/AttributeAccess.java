@@ -16,6 +16,8 @@ import fr.n7.stl.tam.ast.Library;
 
 public class AttributeAccess extends AbstractAttribute<AccessibleExpression>  implements AccessibleExpression {
 
+	protected ClassType classType;
+
 	public AttributeAccess(AccessibleExpression _object, String _name) {
 		super(_object,_name);
 	}
@@ -31,11 +33,16 @@ public class AttributeAccess extends AbstractAttribute<AccessibleExpression>  im
 		if(this.object.getType() instanceof ClassType cobject){
 			if((_scope.knows(cobject.getName()) && (_scope.get(cobject.getName()) instanceof ClassDeclaration cdec))){
 				attribute = cdec.getAttribute(name);
-				if(attribute.getAccessRight()==AccessRight.PROTECTED||attribute.getAccessRight()==AccessRight.PRIVATE){
+				if((attribute.getClassDeclaration()!= _scope.getThisClass()) && attribute.getAccessRight()==AccessRight.PRIVATE){
 					Logger.error("L'attribut "+ attribute.getName() +" de la classe "+object.toString() +" est inaccesssible");
+					return false;
+				}else if((attribute.getClassDeclaration()!= _scope.getThisClass()) && attribute.getAccessRight()==AccessRight.PROTECTED){
+					if(_scope.getThisClass()==null || !_scope.getThisClass().getType().compatibleWith(attribute.getClassDeclaration().getType())){
+						Logger.error("L'attribut "+ attribute.getName() +" de la classe "+object.toString() +" est inaccesssible");
+						return false;
+					} 
 				}
-				return true;
-			}
+				}							
 		}
 		return object.completeResolve(_scope) && this.object.getType().completeResolve(_scope);
 	}

@@ -10,12 +10,15 @@ import fr.n7.stl.minic.ast.scope.SymbolTable;
 import fr.n7.stl.minijava.ast.type.declaration.ClassDeclaration;
 import fr.n7.stl.minic.ast.SemanticsUndefinedException;
 import fr.n7.stl.util.Logger;
+import fr.n7.stl.minic.ast.*;
+import fr.n7.stl.minic.ast.instruction.declaration.*;
 
 
 
 public abstract class AbstractThis <ObjectKind extends Expression> implements Expression {
 
 	protected ClassDeclaration object;
+	protected String z;
 
 	public AbstractThis() {
 		// TODO Auto-generated constructor stub
@@ -36,7 +39,7 @@ public abstract class AbstractThis <ObjectKind extends Expression> implements Ex
 				ok = false;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	@Override

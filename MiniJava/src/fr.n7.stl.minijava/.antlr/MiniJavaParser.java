@@ -1,4 +1,4 @@
-// Generated from /home/gutierrez/projet ecole/minijava/miniJava/MiniJava/src/fr.n7.stl.minijava/MiniJavaParser.g4 by ANTLR 4.13.1
+// Generated from /home/gutierrez/projetjava/miniJava/MiniJava/src/fr.n7.stl.minijava/MiniJavaParser.g4 by ANTLR 4.13.1
 
 package fr.n7.stl.minijava.parser;
 import java.io.IOException;
@@ -161,6 +161,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_programme; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterProgramme(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitProgramme(this);
+		}
 	}
 
 	public final ProgrammeContext programme() throws RecognitionException {
@@ -201,6 +209,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_classes; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterClasses(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitClasses(this);
+		}
 	}
 
 	public final ClassesContext classes() throws RecognitionException {
@@ -261,6 +277,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_classe; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterClasse(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitClasse(this);
+		}
 	}
 
 	public final ClasseContext classe() throws RecognitionException {
@@ -354,6 +378,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_principale; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterPrincipale(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitPrincipale(this);
+		}
 	}
 
 	public final PrincipaleContext principale() throws RecognitionException {
@@ -449,6 +481,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(BlocContext.class,0);
 		}
 		public MethodeMainContext(DeclarationContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterMethodeMain(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitMethodeMain(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class AttributMainContext extends DeclarationContext {
@@ -468,6 +508,14 @@ public class MiniJavaParser extends Parser {
 		}
 		public TerminalNode Definitif() { return getToken(MiniJavaParser.Definitif, 0); }
 		public AttributMainContext(DeclarationContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterAttributMain(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitAttributMain(this);
+		}
 	}
 
 	public final DeclarationContext declaration() throws RecognitionException {
@@ -546,6 +594,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_elements; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterElements(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitElements(this);
+		}
 	}
 
 	public final ElementsContext elements() throws RecognitionException {
@@ -593,6 +649,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_accessRight; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterAccessRight(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitAccessRight(this);
+		}
 	}
 
 	public final AccessRightContext accessRight() throws RecognitionException {
@@ -645,6 +709,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_element; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterElement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitElement(this);
+		}
 	}
 
 	public final ElementContext element() throws RecognitionException {
@@ -722,6 +794,14 @@ public class MiniJavaParser extends Parser {
 		}
 		public TerminalNode Definitif() { return getToken(MiniJavaParser.Definitif, 0); }
 		public AttributClasseContext(AttributContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterAttributClasse(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitAttributClasse(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class AttributObjetContext extends AttributContext {
@@ -733,6 +813,14 @@ public class MiniJavaParser extends Parser {
 		}
 		public TerminalNode Identificateur() { return getToken(MiniJavaParser.Identificateur, 0); }
 		public AttributObjetContext(AttributContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterAttributObjet(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitAttributObjet(this);
+		}
 	}
 
 	public final AttributContext attribut() throws RecognitionException {
@@ -831,6 +919,14 @@ public class MiniJavaParser extends Parser {
 		}
 		public TerminalNode Definitif() { return getToken(MiniJavaParser.Definitif, 0); }
 		public MethodeClasseContext(MethodeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterMethodeClasse(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitMethodeClasse(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class MethodeObjetContext extends MethodeContext {
@@ -845,6 +941,14 @@ public class MiniJavaParser extends Parser {
 		}
 		public TerminalNode Definitif() { return getToken(MiniJavaParser.Definitif, 0); }
 		public MethodeObjetContext(MethodeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterMethodeObjet(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitMethodeObjet(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class MethodeAbstraiteContext extends MethodeContext {
@@ -855,6 +959,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(SignatureContext.class,0);
 		}
 		public MethodeAbstraiteContext(MethodeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterMethodeAbstraite(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitMethodeAbstraite(this);
+		}
 	}
 
 	public final MethodeContext methode() throws RecognitionException {
@@ -960,6 +1072,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_signature; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterSignature(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitSignature(this);
+		}
 	}
 
 	public final SignatureContext signature() throws RecognitionException {
@@ -1010,6 +1130,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_constructeur; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterConstructeur(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitConstructeur(this);
+		}
 	}
 
 	public final ConstructeurContext constructeur() throws RecognitionException {
@@ -1058,6 +1186,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bloc; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterBloc(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitBloc(this);
+		}
 	}
 
 	public final BlocContext bloc() throws RecognitionException {
@@ -1118,6 +1254,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parametres; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterParametres(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitParametres(this);
+		}
 	}
 
 	public final ParametresContext parametres() throws RecognitionException {
@@ -1192,6 +1336,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parametre; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterParametre(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitParametre(this);
+		}
 	}
 
 	public final ParametreContext parametre() throws RecognitionException {
@@ -1243,6 +1395,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
 		public InstructionAppelMethodeImpliciteContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionAppelMethodeImplicite(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionAppelMethodeImplicite(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionReturnContext extends InstructionContext {
@@ -1253,6 +1413,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public InstructionReturnContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionReturn(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionReturn(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionAppelConstructeurParentContext extends InstructionContext {
@@ -1265,6 +1433,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
 		public InstructionAppelConstructeurParentContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionAppelConstructeurParent(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionAppelConstructeurParent(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionSiSinonContext extends InstructionContext {
@@ -1285,6 +1461,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(BlocContext.class,i);
 		}
 		public InstructionSiSinonContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionSiSinon(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionSiSinon(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionSiContext extends InstructionContext {
@@ -1300,6 +1484,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(BlocContext.class,0);
 		}
 		public InstructionSiContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionSi(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionSi(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionAffichageContext extends InstructionContext {
@@ -1310,6 +1502,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public InstructionAffichageContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionAffichage(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionAffichage(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionAppelMethodeExpliciteContext extends InstructionContext {
@@ -1328,6 +1528,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
 		public InstructionAppelMethodeExpliciteContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionAppelMethodeExplicite(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionAppelMethodeExplicite(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionAppelConstructeurAlternatifContext extends InstructionContext {
@@ -1340,6 +1548,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
 		public InstructionAppelConstructeurAlternatifContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionAppelConstructeurAlternatif(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionAppelConstructeurAlternatif(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionDeclarationContext extends InstructionContext {
@@ -1356,6 +1572,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public InstructionDeclarationContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionDeclaration(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionIterationContext extends InstructionContext {
@@ -1371,6 +1595,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(BlocContext.class,0);
 		}
 		public InstructionIterationContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionIteration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionIteration(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionAffectationContext extends InstructionContext {
@@ -1385,6 +1617,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public InstructionAffectationContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterInstructionAffectation(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitInstructionAffectation(this);
+		}
 	}
 
 	public final InstructionContext instruction() throws RecognitionException {
@@ -1594,6 +1834,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_atomique; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterAtomique(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitAtomique(this);
+		}
 	}
 
 	public final AtomiqueContext atomique() throws RecognitionException {
@@ -1647,12 +1895,28 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(AtomiqueContext.class,0);
 		}
 		public TypeAtomiqueContext(TypeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterTypeAtomique(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitTypeAtomique(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class TypeClasseContext extends TypeContext {
 		public Token leNom;
 		public TerminalNode Identificateur() { return getToken(MiniJavaParser.Identificateur, 0); }
 		public TypeClasseContext(TypeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterTypeClasse(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitTypeClasse(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class TypeTableauContext extends TypeContext {
@@ -1663,6 +1927,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(TypeContext.class,0);
 		}
 		public TypeTableauContext(TypeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterTypeTableau(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitTypeTableau(this);
+		}
 	}
 
 	public final TypeContext type() throws RecognitionException {
@@ -1768,6 +2040,14 @@ public class MiniJavaParser extends Parser {
 		public Token lIdentificateur;
 		public TerminalNode Identificateur() { return getToken(MiniJavaParser.Identificateur, 0); }
 		public EcritureIdentificateurContext(AffectableContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterEcritureIdentificateur(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitEcritureIdentificateur(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class EcritureAppelMethodeExpliciteContext extends AffectableContext {
@@ -1785,12 +2065,28 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
 		public EcritureAppelMethodeExpliciteContext(AffectableContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterEcritureAppelMethodeExplicite(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitEcritureAppelMethodeExplicite(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class EcritureThisContext extends AffectableContext {
 		public Token leMoi;
 		public TerminalNode Moi() { return getToken(MiniJavaParser.Moi, 0); }
 		public EcritureThisContext(AffectableContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterEcritureThis(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitEcritureThis(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class EcritureConversionContext extends AffectableContext {
@@ -1805,6 +2101,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(AffectableContext.class,0);
 		}
 		public EcritureConversionContext(AffectableContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterEcritureConversion(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitEcritureConversion(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class EcritureAppelMethodeImpliciteContext extends AffectableContext {
@@ -1817,6 +2121,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
 		public EcritureAppelMethodeImpliciteContext(AffectableContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterEcritureAppelMethodeImplicite(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitEcritureAppelMethodeImplicite(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class EcritureAttributContext extends AffectableContext {
@@ -1828,12 +2140,28 @@ public class MiniJavaParser extends Parser {
 		}
 		public TerminalNode Identificateur() { return getToken(MiniJavaParser.Identificateur, 0); }
 		public EcritureAttributContext(AffectableContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterEcritureAttribut(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitEcritureAttribut(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class EcritureSuperContext extends AffectableContext {
 		public Token leSuper;
 		public TerminalNode Super() { return getToken(MiniJavaParser.Super, 0); }
 		public EcritureSuperContext(AffectableContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterEcritureSuper(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitEcritureSuper(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class EcritureTableauContext extends AffectableContext {
@@ -1848,6 +2176,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public EcritureTableauContext(AffectableContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterEcritureTableau(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitEcritureTableau(this);
+		}
 	}
 
 	public final AffectableContext affectable() throws RecognitionException {
@@ -2025,6 +2361,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expressions; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressions(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressions(this);
+		}
 	}
 
 	public final ExpressionsContext expressions() throws RecognitionException {
@@ -2078,6 +2422,14 @@ public class MiniJavaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arguments; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterArguments(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitArguments(this);
+		}
 	}
 
 	public final ArgumentsContext arguments() throws RecognitionException {
@@ -2145,6 +2497,14 @@ public class MiniJavaParser extends Parser {
 	public static class ExpressionCharacterContext extends ExpressionContext {
 		public TerminalNode Caractere() { return getToken(MiniJavaParser.Caractere, 0); }
 		public ExpressionCharacterContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionCharacter(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionCharacter(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionOpposeeContext extends ExpressionContext {
@@ -2154,6 +2514,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public ExpressionOpposeeContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionOpposee(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionOpposee(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class CreationObjetContext extends ExpressionContext {
@@ -2167,6 +2535,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
 		public CreationObjetContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterCreationObjet(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitCreationObjet(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionConditionelleContext extends ExpressionContext {
@@ -2182,6 +2558,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,i);
 		}
 		public ExpressionConditionelleContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionConditionelle(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionConditionelle(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LectureTableauContext extends ExpressionContext {
@@ -2196,6 +2580,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,i);
 		}
 		public LectureTableauContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterLectureTableau(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitLectureTableau(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LectureAppelMethodeImpliciteContext extends ExpressionContext {
@@ -2208,6 +2600,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
 		public LectureAppelMethodeImpliciteContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterLectureAppelMethodeImplicite(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitLectureAppelMethodeImplicite(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionParentheseContext extends ExpressionContext {
@@ -2218,17 +2618,41 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public ExpressionParentheseContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionParenthese(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionParenthese(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LectureIdentificateurContext extends ExpressionContext {
 		public Token leNom;
 		public TerminalNode Identificateur() { return getToken(MiniJavaParser.Identificateur, 0); }
 		public LectureIdentificateurContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterLectureIdentificateur(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitLectureIdentificateur(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LectureThisContext extends ExpressionContext {
 		public TerminalNode Moi() { return getToken(MiniJavaParser.Moi, 0); }
 		public LectureThisContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterLectureThis(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitLectureThis(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class CreationTableauContext extends ExpressionContext {
@@ -2244,6 +2668,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public CreationTableauContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterCreationTableau(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitCreationTableau(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LectureAttributContext extends ExpressionContext {
@@ -2255,11 +2687,27 @@ public class MiniJavaParser extends Parser {
 		}
 		public TerminalNode Identificateur() { return getToken(MiniJavaParser.Identificateur, 0); }
 		public LectureAttributContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterLectureAttribut(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitLectureAttribut(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionNullContext extends ExpressionContext {
 		public TerminalNode Nul() { return getToken(MiniJavaParser.Nul, 0); }
 		public ExpressionNullContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionNull(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionNull(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionConversionContext extends ExpressionContext {
@@ -2273,6 +2721,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(TypeContext.class,0);
 		}
 		public ExpressionConversionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionConversion(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionConversion(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionDisjonctionContext extends ExpressionContext {
@@ -2287,6 +2743,14 @@ public class MiniJavaParser extends Parser {
 		}
 		public TerminalNode DoubleBarre() { return getToken(MiniJavaParser.DoubleBarre, 0); }
 		public ExpressionDisjonctionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionDisjonction(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionDisjonction(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionConjonctionContext extends ExpressionContext {
@@ -2301,6 +2765,14 @@ public class MiniJavaParser extends Parser {
 		}
 		public TerminalNode DoubleEsperluette() { return getToken(MiniJavaParser.DoubleEsperluette, 0); }
 		public ExpressionConjonctionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionConjonction(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionConjonction(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionComparaisonContext extends ExpressionContext {
@@ -2318,6 +2790,14 @@ public class MiniJavaParser extends Parser {
 		public TerminalNode Superieur() { return getToken(MiniJavaParser.Superieur, 0); }
 		public TerminalNode SuperieurEgal() { return getToken(MiniJavaParser.SuperieurEgal, 0); }
 		public ExpressionComparaisonContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionComparaison(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionComparaison(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionAdditiveContext extends ExpressionContext {
@@ -2333,11 +2813,27 @@ public class MiniJavaParser extends Parser {
 		public TerminalNode Plus() { return getToken(MiniJavaParser.Plus, 0); }
 		public TerminalNode Moins() { return getToken(MiniJavaParser.Moins, 0); }
 		public ExpressionAdditiveContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionAdditive(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionAdditive(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionTrueContext extends ExpressionContext {
 		public TerminalNode Vrai() { return getToken(MiniJavaParser.Vrai, 0); }
 		public ExpressionTrueContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionTrue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionTrue(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionNegationContext extends ExpressionContext {
@@ -2347,6 +2843,14 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public ExpressionNegationContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionNegation(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionNegation(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionMultiplicativeContext extends ExpressionContext {
@@ -2363,26 +2867,66 @@ public class MiniJavaParser extends Parser {
 		public TerminalNode Oblique() { return getToken(MiniJavaParser.Oblique, 0); }
 		public TerminalNode PourCent() { return getToken(MiniJavaParser.PourCent, 0); }
 		public ExpressionMultiplicativeContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionMultiplicative(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionMultiplicative(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionFalseContext extends ExpressionContext {
 		public TerminalNode Faux() { return getToken(MiniJavaParser.Faux, 0); }
 		public ExpressionFalseContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionFalse(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionFalse(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpresionFloatContext extends ExpressionContext {
 		public TerminalNode Flottant() { return getToken(MiniJavaParser.Flottant, 0); }
 		public ExpresionFloatContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpresionFloat(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpresionFloat(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionStringContext extends ExpressionContext {
 		public TerminalNode Chaine() { return getToken(MiniJavaParser.Chaine, 0); }
 		public ExpressionStringContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionString(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionString(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LectureSuperContext extends ExpressionContext {
 		public TerminalNode Super() { return getToken(MiniJavaParser.Super, 0); }
 		public LectureSuperContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterLectureSuper(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitLectureSuper(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionEgaliteContext extends ExpressionContext {
@@ -2398,6 +2942,14 @@ public class MiniJavaParser extends Parser {
 		public TerminalNode DoubleEgal() { return getToken(MiniJavaParser.DoubleEgal, 0); }
 		public TerminalNode ExclamationEgal() { return getToken(MiniJavaParser.ExclamationEgal, 0); }
 		public ExpressionEgaliteContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionEgalite(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionEgalite(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LectureAppelMethodeExpliciteContext extends ExpressionContext {
@@ -2415,11 +2967,27 @@ public class MiniJavaParser extends Parser {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
 		public LectureAppelMethodeExpliciteContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterLectureAppelMethodeExplicite(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitLectureAppelMethodeExplicite(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionIntContext extends ExpressionContext {
 		public TerminalNode Entier() { return getToken(MiniJavaParser.Entier, 0); }
 		public ExpressionIntContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).enterExpressionInt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniJavaParserListener ) ((MiniJavaParserListener)listener).exitExpressionInt(this);
+		}
 	}
 
 	public final ExpressionContext expression() throws RecognitionException {
